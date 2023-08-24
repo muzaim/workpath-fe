@@ -1,0 +1,35 @@
+{
+   "pageProps": {
+      "data": [
+         {
+            "id": "2WqDotCfNdeRgvqoxKfL",
+            "price": 30000,
+            "name": "Razer Keyboard Hyurang",
+            "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/0fd1487b-306c-4b70-a96a-cd6ac99e7d61/air-max-1-shoes-ZCSX34.png",
+            "active": true
+         },
+         {
+            "id": "7NvmOYBzFiXYcm4Er1HJ",
+            "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/8c019b96-78f2-4df6-9c9a-78b6b509899b/air-more-uptempo-96-shoes-sQs1FD.png",
+            "price": 77134,
+            "name": "Shoes Gaming",
+            "active": true
+         },
+         {
+            "id": "Ps4Oz3CYrTiYfWcZZagV",
+            "active": true,
+            "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/63c3d532-d82f-4dfd-ac86-5e0eea991a7b/air-jordan-1-low-shoes-6Q1tFM.png",
+            "price": 35111,
+            "name": "Sepatu Razer"
+         },
+         {
+            "id": "eOIHQr2olSQVvJl4spHR",
+            "active": true,
+            "price": 39000,
+            "name": "Steelserries XR Headset",
+            "image": "https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/46e537d4-38f1-4ab6-86e3-9316a7450d43/metcon-9-workout-shoes-ldMsxB.png"
+         }
+      ]
+   },
+   "__N_SSG": true
+}
