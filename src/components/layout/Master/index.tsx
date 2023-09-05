@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 type PropsType = {
 	children: React.ReactNode;
@@ -13,6 +14,7 @@ const MasterLayout = (props: PropsType) => {
 		<main>
 			{!disableNavbar.includes(pathname) && <Navbar />}
 			{children}
+			{!disableNavbar.includes(pathname) && <Footer />}
 		</main>
 	);
 };

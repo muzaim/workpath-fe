@@ -22,13 +22,15 @@ const Register = () => {
 			body: JSON.stringify(data),
 		});
 
-		if (result.status === 200) {
+		const hanya = await result.json();
+
+		if (hanya.status) {
 			e.target.reset();
 			setIsLoading(false);
 			push("/auth/login");
 		} else {
 			setIsLoading(false);
-			setError(result.status === 400 ? "Email sudah terdaftar" : "");
+			setError(result.status === 400 ? hanya.message : "");
 		}
 	};
 

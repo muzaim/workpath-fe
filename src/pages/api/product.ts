@@ -1,5 +1,5 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { retrieveData } from "@/lib/firebase/service";
+import { addProduct, retrieveData } from "@/lib/firebase/service";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -12,7 +12,13 @@ export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	const data = await retrieveData("product");
+	if (req.method === "GET") {
+		const data = await retrieveData("product");
 
-	res.status(200).json({ status: 200, message: "Success", data });
+		res.status(200).json({ status: 200, message: "Success", data });
+	} else if (req.method === "POST") {
+		await addProduct(req.body, (data: Data) => {
+			res.status(200).json({ status: 200, message: "Success", data });
+		});
+	}
 }
