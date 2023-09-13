@@ -11,8 +11,13 @@ module.exports = {
 	theme: {
 		fontFamily: {
 			poppins: ["Poppins", "sans-serif"],
+			KaushanScript: ["Kaushan Script"],
 		},
-		extend: {},
+		extend: {
+			backgroundImage: {
+				'hero': "url('/img/bg/19744.jpg')",
+			}
+		}
 	},
 	plugins: [],
 };

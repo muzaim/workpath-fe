@@ -1,8 +1,9 @@
-@import "@/styles/colors.scss";
+/* App.css */
+.no-scroll {
+   overflow: hidden;
+}
 
-.navbar {
-   display: flex;
-   width: 100%;
-   background-color: map-get($map: $schema, $key: color);
-   padding: 20px 50px;
+/* Additional styles for your content go here */
+.content {
+   /* Add your content styles */
 }

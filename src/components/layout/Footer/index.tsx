@@ -11,7 +11,7 @@ import {
 
 const Footer = () => {
 	return (
-		<div className="w-full h-max bg-[#071233] pt-8">
+		<div className="w-full h-max bg-[#071233] pt-8 -z-10">
 			<div className="pt-10 relative px-4  container mx-auto md:grid md:grid-cols-12 md:gap-5">
 				<div className="md:col-span-4">
 					<div className="flex gap-1 justify-start items-center relative cursor-pointer">
@@ -145,27 +145,27 @@ const Footer = () => {
 						Copyright © 2023 WorkPath. All rights reserved.
 					</p>
 					<ul className="flex gap-5 justify-center items-center">
-						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:scale-125 transition-all duration-200 cursor-pointer">
+						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
 							<Link href="#" className="">
 								<CiFacebook className="lg:text-xl" />
 							</Link>
 						</li>
-						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:scale-125 transition-all duration-200 cursor-pointer">
+						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
 							<Link href="#" className="">
 								<CiInstagram className="lg:text-xl" />
 							</Link>
 						</li>
-						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:scale-125 transition-all duration-200 cursor-pointer">
+						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
 							<Link href="#" className="">
 								<CiLinkedin className="lg:text-xl" />
 							</Link>
 						</li>
-						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:scale-125 transition-all duration-200 cursor-pointer">
+						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
 							<Link href="#" className="">
 								<CiTwitter className="lg:text-xl" />
 							</Link>
 						</li>
-						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:scale-125 transition-all duration-200 cursor-pointer">
+						<li className="text-white rounded-full grid place-content-center w-8 h-8 lg:w-10 lg:h-10 bg-blue-900 hover:bg-blue-600 transition-all duration-200 cursor-pointer">
 							<Link href="#" className="">
 								<CiYoutube className="lg:text-xl" />
 							</Link>

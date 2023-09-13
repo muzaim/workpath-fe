@@ -231,25 +231,25 @@ export default function Home() {
 	return (
 		<>
 			{/* HERO */}
-			<div className="w-full h-max pb-10 bg-gray-100 lg:pb-0">
+			<div className="w-full pt-20 lg:pt-0 h-max pb-10 bg-hero bg-cover lg:pb-0">
 				<div className="px-4 grid grid-cols-12 md:container md:mx-auto items-center">
 					{/* KIRI */}
-					<div className="col-span-12 mt-5 md:col-span-7 ">
-						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-relaxed tracking-tighter lg:text-7xl">
+					<div className="col-span-12 mt-5 lg:col-span-7 text-center md:py-20 w-full mx-auto  ">
+						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-relaxed tracking-tighter md:text-6xl lg:text-7xl">
 							Discover
 						</h1>
-						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-relaxed tracking-tighter lg:text-7xl">
+						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-relaxed tracking-tighter md:text-6xl lg:text-7xl">
 							more than
 						</h1>
 						<h1 className="font-bold text-5xl text-sky-400 font-poppins leading-relaxed tracking-tighter lg:text-7xl">
 							5000+ Jobs
 						</h1>
-						<p className="text-justify text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 lg:text-xl lg:my-5">
+						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto lg:text-xl">
 							Lorem ipsum dolor, sit amet consectetur adipisicing
 							elit. Animi, illo dolore soluta maxime officia,
 							cupiditate at dolores.
 						</p>
-						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-10  sm:w-3/4 lg:flex-row lg:w-full lg:justify-between lg:px-5 lg:py-3">
+						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/4 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
 							<div className="flex justify-center items-center gap-1 w-full">
 								<BsSearch />
 								<input
@@ -278,7 +278,7 @@ export default function Home() {
 								Search my job
 							</button>
 						</div>
-						<div className="text-start text-gray-400 mt-3 font-poppins w-full lg:text-lg">
+						<div className="text-center text-sky-950 mt-3 font-poppins w-full lg:text-lg">
 							<p>
 								Popular : Frontend Developer, Backend Developer,
 								UI/UX Freelancer
@@ -286,7 +286,7 @@ export default function Home() {
 						</div>
 					</div>
 					{/* KANAN */}
-					<div className="hidden lg:block lg:col-span-5 ">
+					<div className="hidden  lg:col-span-5 lg:flex lg:justify-end h-full w-full  ">
 						<Image
 							src={Girl}
 							alt=""
@@ -418,7 +418,7 @@ export default function Home() {
 			{/* FEATURED JOBS */}
 			<div className="px-4 md:container md:mx-auto py-20 ">
 				<div className="flex justify-between items-start py-5">
-					<h1 className="text-xl font-poppins font-semibold mb-5 lg:text-4xl">
+					<h1 className="text-xl font-poppins font-semibold lg:text-4xl">
 						Featured <span className="text-blue-700">jobs</span>
 					</h1>
 					<span className=" items-center gap-3 text-blue-700 font-bold  cursor-pointer flex lg:text-xl">
@@ -455,8 +455,8 @@ export default function Home() {
 						}}
 					>
 						{featuredJobs.map((item) => (
-							<SwiperSlide key={item.id} className="py-5">
-								<div className=" w-full  h-[15rem] border p-4 flex flex-col justify-between hover:scale-110 duration-300 transition-all">
+							<SwiperSlide key={item.id} className="py-5 ">
+								<div className=" w-full  h-[15rem] border p-4 flex flex-col justify-between hover:shadow-lg">
 									<div className="flex gap-3 items-center justify-between ">
 										<div className="w-[3rem] ">
 											{/* {item.logo} */}
@@ -545,7 +545,7 @@ export default function Home() {
 				</div>
 			</div>
 			{/* LATEST JOB OPEN */}
-			<div className="px-4  pt-10 bg-gray-100 ">
+			<div className="px-4  pt-10  bg-gray-100 ">
 				<div className="container mx-auto">
 					<div className="flex justify-between items-start py-5">
 						<h1 className="text-xl font-poppins font-semibold mb-5 lg:text-4xl tracking-tighter">
@@ -561,7 +561,7 @@ export default function Home() {
 					{latestJob.map((item) => (
 						<div
 							key={item.id}
-							className="flex flex-col md:flex-row md:items-center md:gap-6 w-full h-[10rem] p-4 bg-white col-span-12 md:col-span-6 hover:shadow-lg transition-all duration-300"
+							className="flex pb-5 flex-col md:flex-row md:items-center md:gap-6 w-full h-[10rem] p-4 bg-white col-span-12 md:col-span-6 hover:shadow-lg transition-all duration-300"
 						>
 							<div className="w-12 h-12 lg:w-14 lg:h-1w-14">
 								<Image

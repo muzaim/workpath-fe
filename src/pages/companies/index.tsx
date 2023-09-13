@@ -8,6 +8,7 @@ import Image from "next/image";
 import TravelokaIcon from "public/img/icon/trav.png";
 
 import LoadingBar from "@/components/elements/jobs/LoadingBar";
+import { useRouter } from "next/router";
 
 const allJobs = [
 	{
@@ -73,11 +74,19 @@ const allJobs = [
 		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
 		job: 7,
 	},
+	{
+		id: 10,
+		logo: TravelokaIcon,
+		company: "Mayora",
+		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
+		job: 2,
+	},
 ];
 const Jobs = () => {
 	const [showType, setShowType] = useState(true);
 	const [showCompanySize, setShowCompanySize] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const Router = useRouter();
 
 	const handleClickFilter = () => {
 		setLoading(true);
@@ -94,22 +103,22 @@ const Jobs = () => {
 	return (
 		<>
 			{/* HERO */}
-			<div className="w-full h-max pb-10 bg-gray-100 lg:pb-0">
+			<div className="w-full pt-40 lg:pt-0 h-max pb-10 bg-hero bg-cover lg:pb-0">
 				<div className="px-4 grid grid-cols-12 md:container md:mx-auto items-center">
 					{/* KIRI */}
-					<div className="col-span-12 mt-5 md:col-span-12 text-center md:py-20 md:w-3/4  mx-auto">
+					<div className="col-span-12 mt-5 md:col-span-12 text-center md:py-20 w-full mx-auto ">
 						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-tight tracking-tighter lg:text-7xl">
 							Find your
 						</h1>
 
-						<h1 className="font-bold text-5xl text-sky-400 font-poppins leading-tight tracking-tighter lg:text-7xl">
+						<h1 className="font-bold text-5xl text-sky-600 font-KaushanScript leading-tight tracking-wide lg:text-7xl">
 							dream companies
 						</h1>
 						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto lg:text-xl">
 							Lorem ipsum dolor, sit amet consectetur adipisicing
 							elit. Sunt, veniam.
 						</p>
-						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-10  sm:w-3/4 md:w-1/2 mx-auto lg:flex-row lg:w-full lg:justify-between lg:px-5 lg:py-3 shadow-lg">
+						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/4 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
 							<div className="flex justify-center items-center gap-1 w-full">
 								<BsSearch />
 								<input
@@ -124,21 +133,23 @@ const Jobs = () => {
 									id="countries"
 									className="w-full px-2 py-2 border-solid bg-white"
 								>
-									<option selected>Sleman, Yogyakarta</option>
-									<option value="US">United States</option>
-									<option value="CA">Canada</option>
-									<option value="FR">France</option>
-									<option value="DE">Germany</option>
+									<option selected defaultValue={"US"}>
+										Technology
+									</option>
+									<option value="US">Business</option>
+									<option value="CA">Management</option>
+									<option value="FR">Accountant</option>
+									<option value="DE">Human Resources</option>
 								</select>
 							</div>
 							<button
 								className="py-3 px-6 font-bold bg-blue-700  text-white border border-transparent hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 transition duration-300 lg:w-[25rem]"
 								onClick={handleClickFilter}
 							>
-								Search my job
+								Search companies
 							</button>
 						</div>
-						<div className="text-start text-gray-400 mt-3 font-poppins w-full lg:text-lg lg:text-start ">
+						<div className="text-center text-sky-900 mt-3 font-poppins w-full sm:text-center md:text-center lg:text-lg lg:text-center ">
 							<p>Popular : Apple, Microsoft, Google</p>
 						</div>
 					</div>
@@ -151,9 +162,9 @@ const Jobs = () => {
 			</button>
 			{/* ALL JOBS */}
 			<div className="px-4 pt-10 container mx-auto lg:px-0">
-				<div className="grid grid-cols-12 gap-10">
+				<div className="grid grid-cols-10 gap-10">
 					{/* KIRI */}
-					<div className="hidden lg:block lg:col-span-3">
+					<div className="hidden lg:block lg:col-span-2">
 						{/* TYPE OF EMPLOYEE */}
 						<div className="overflow-hidden">
 							<div
@@ -176,8 +187,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										showType
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -378,7 +389,9 @@ const Jobs = () => {
 									setShowCompanySize(!showCompanySize)
 								}
 							>
-								<h1 className="font-bold">Company Size</h1>
+								<h1 className="font-bold cursor-pointer">
+									Company Size
+								</h1>
 								<AiOutlineUp
 									className={`cursor-pointer ${
 										showCompanySize
@@ -391,8 +404,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										showCompanySize
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -486,7 +499,7 @@ const Jobs = () => {
 					</div>
 					{/* KANAN */}
 					{!loading ? (
-						<div className="col-span-12 flex flex-col gap-4 mt-5 pb-20 lg:col-span-9">
+						<div className="col-span-10 flex flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">
 							<div>
 								<h1 className="text-3xl font-semibold font-poppins">
 									All Companies
@@ -500,11 +513,16 @@ const Jobs = () => {
 									</span>
 								</div>
 							</div>
-							<div className="grid grid-cols-12 gap-5">
+							<div className="grid grid-cols-12 gap-5 ">
 								{allJobs.map((item) => (
 									<div
 										key={item.id}
-										className="col-span-12 border p-4 hover:shadow-lg transition-all duration-300 lg:col-span-6"
+										className="col-span-12 border p-4 hover:shadow-lg transition-all duration-300 md:col-span-6 lg:col-span-6 cursor-pointer"
+										onClick={() => {
+											Router.push(
+												`/companies/${item.id}`
+											);
+										}}
 									>
 										<div className="flex justify-between items-start">
 											<div className="w-20 h-20">
@@ -541,7 +559,7 @@ const Jobs = () => {
 							</div>
 						</div>
 					) : (
-						<div className="col-span-12 min-h-screen flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-9 ">
+						<div className="col-span-10 min-h-screen flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">
 							<div role="" className="mt-10">
 								<svg
 									aria-hidden="true"

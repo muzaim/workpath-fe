@@ -8,6 +8,7 @@ import Image from "next/image";
 import TravelokaIcon from "public/img/icon/trav.png";
 
 import LoadingBar from "@/components/elements/jobs/LoadingBar";
+import { useRouter } from "next/router";
 
 const allJobs = [
 	{
@@ -19,6 +20,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 5,
 		capacity: 10,
+		salary: "10.000.000 - 15.000.000",
 	},
 	{
 		id: 2,
@@ -29,6 +31,7 @@ const allJobs = [
 		type: "Freelance",
 		applied: 3,
 		capacity: 10,
+		salary: "8.000.000 - 12.000.000",
 	},
 	{
 		id: 3,
@@ -39,6 +42,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 6,
 		capacity: 12,
+		salary: "6.000.000 - 8.000.000",
 	},
 	{
 		id: 4,
@@ -49,6 +53,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 2,
 		capacity: 10,
+		salary: "9.000.000 - 12.000.000",
 	},
 	{
 		id: 5,
@@ -59,6 +64,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 9,
 		capacity: 20,
+		salary: "7.000.000 - 9.000.000",
 	},
 	{
 		id: 6,
@@ -69,6 +75,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 6,
 		capacity: 10,
+		salary: "4.000.000 - 9.000.000",
 	},
 	{
 		id: 7,
@@ -79,6 +86,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 6,
 		capacity: 10,
+		salary: "8.000.000 - 13.000.000",
 	},
 	{
 		id: 8,
@@ -89,6 +97,7 @@ const allJobs = [
 		type: "Full Time",
 		applied: 1,
 		capacity: 5,
+		salary: "5.000.000 - 7.000.000",
 	},
 ];
 const Jobs = () => {
@@ -97,6 +106,8 @@ const Jobs = () => {
 	const [jobLevel, setJobLevel] = useState(true);
 	const [salary, setSalary] = useState(true);
 	const [loading, setLoading] = useState(true);
+
+	const Router = useRouter();
 
 	const handleClickFilter = () => {
 		setLoading(true);
@@ -113,22 +124,22 @@ const Jobs = () => {
 	return (
 		<>
 			{/* HERO */}
-			<div className="w-full h-max pb-10 bg-gray-100 lg:pb-0">
+			<div className="w-full pt-20 lg:pt-0 h-max pb-10 bg-hero bg-cover lg:pb-0">
 				<div className="px-4 grid grid-cols-12 md:container md:mx-auto items-center">
 					{/* KIRI */}
-					<div className="col-span-12 mt-5 md:col-span-12 text-center md:py-20 md:w-3/4  mx-auto">
-						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-tight tracking-tighter lg:text-7xl">
+					<div className="col-span-12 mt-5 md:col-span-12 text-center md:py-20 w-full  mx-auto">
+						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-tight tracking-tighter md:text-6xl lg:text-7xl">
 							Find your
 						</h1>
 
-						<h1 className="font-bold text-5xl text-sky-400 font-poppins leading-tight tracking-tighter lg:text-7xl">
+						<h1 className="font-bold text-5xl text-sky-600 font-KaushanScript leading-tight tracking-wide md:text-6xl lg:text-7xl">
 							dream job
 						</h1>
-						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto lg:text-xl">
+						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto md:text-lg lg:text-xl">
 							Lorem ipsum dolor, sit amet consectetur adipisicing
 							elit. Sunt, veniam.
 						</p>
-						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-10  sm:w-3/4 md:w-1/2 mx-auto lg:flex-row lg:w-full lg:justify-between lg:px-5 lg:py-3 shadow-lg">
+						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/2 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
 							<div className="flex justify-center items-center gap-1 w-full">
 								<BsSearch />
 								<input
@@ -157,7 +168,7 @@ const Jobs = () => {
 								Search my job
 							</button>
 						</div>
-						<div className="text-start text-gray-400 mt-3 font-poppins w-full lg:text-lg lg:text-start ">
+						<div className="text-center text-sky-900 mt-3 font-poppins w-full lg:text-lg  ">
 							<p>
 								Popular : Frontend Developer, Backend Developer,
 								UI/UX Freelancer
@@ -172,17 +183,17 @@ const Jobs = () => {
 				<span className="text-md">More Filter</span>
 			</button>
 			{/* ALL JOBS */}
-			<div className="px-4 pt-10 container mx-auto lg:px-0">
-				<div className="grid grid-cols-12 gap-10">
+			<div className="px-4 pt-10 container mx-auto lg:px-0 ">
+				<div className="grid grid-cols-10 gap-10 ">
 					{/* KIRI */}
-					<div className="hidden lg:block lg:col-span-3">
+					<div className="hidden lg:block lg:col-span-2 ">
 						{/* TYPE OF EMPLOYEE */}
 						<div className="mt-3">
 							<div
 								className="flex justify-between items-center text-xl"
 								onClick={() => setTypeEmployee(!typeEmployee)}
 							>
-								<h1 className="font-bold">
+								<h1 className="font-bold cursor-pointer">
 									Type of employment
 								</h1>
 								<AiOutlineUp
@@ -197,8 +208,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										typeEmployee
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -295,7 +306,9 @@ const Jobs = () => {
 								className="flex justify-between items-center text-xl"
 								onClick={() => setCategories(!categories)}
 							>
-								<h1 className="font-bold">Categories</h1>
+								<h1 className="font-bold cursor-pointer">
+									Categories
+								</h1>
 								<AiOutlineUp
 									className={`cursor-pointer ${
 										categories
@@ -308,8 +321,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										categories
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -457,7 +470,9 @@ const Jobs = () => {
 								className="flex justify-between items-center text-xl"
 								onClick={() => setJobLevel(!jobLevel)}
 							>
-								<h1 className="font-bold">Job Lebel</h1>
+								<h1 className="font-bold cursor-pointer">
+									Job Lebel
+								</h1>
 								<AiOutlineUp
 									className={`cursor-pointer ${
 										jobLevel
@@ -470,8 +485,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										jobLevel
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -568,7 +583,9 @@ const Jobs = () => {
 								className="flex justify-between items-center text-xl"
 								onClick={() => setSalary(!salary)}
 							>
-								<h1 className="font-bold">Salary</h1>
+								<h1 className="font-bold cursor-pointer">
+									Salary
+								</h1>
 								<AiOutlineUp
 									className={`cursor-pointer ${
 										salary
@@ -581,8 +598,8 @@ const Jobs = () => {
 								<div
 									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
 										salary
-											? "block translate-y-0 "
-											: "block -mt-[30rem] -translate-y-full "
+											? " block translate-y-0 "
+											: "absolute -top-[200rem] -translate-y-full "
 									}`}
 								>
 									<div className="flex items-center mb-4">
@@ -659,7 +676,7 @@ const Jobs = () => {
 					</div>
 					{/* KANAN */}
 					{!loading ? (
-						<div className="col-span-12 flex flex-col gap-4 mt-5 pb-20 lg:col-span-9">
+						<div className="col-span-10 justify-center flex flex-col gap-4 mt-5 pb-20 lg:col-span-8 lg:justify-start">
 							<div>
 								<h1 className="text-3xl font-semibold font-poppins">
 									All Jobs
@@ -673,60 +690,70 @@ const Jobs = () => {
 									</span>
 								</div>
 							</div>
-							{allJobs.map((item) => (
-								<div
-									key={item.id}
-									className="flex flex-col border md:flex-row md:items-center md:gap-6 w-full h-auto p-4  bg-white col-span-12 md:col-span-6 hover:shadow-lg transition-all duration-300 "
-								>
-									<div className="w-12 h-12 lg:w-14 lg:h-1w-14">
-										<Image
-											src={TravelokaIcon}
-											alt=""
-											width="0"
-											height="0"
-											className="w-full h-full"
-										></Image>
-									</div>
-									<div className="lg:flex lg:justify-between w-full">
-										<div>
-											<h1 className="font-bold text-lg lg:text-xl">
-												{item.title}
-											</h1>
-											<div className="flex gap-3 text-gray-500 mt-1 mb-2 lg:text-lg">
-												<p>{item.company}</p>
-												<p>{item.location}</p>
+							<div className="grid grid-cols-12 gap-3">
+								{allJobs.map((item) => (
+									<div
+										key={item.id}
+										className="flex flex-col border md:flex-row md:items-center md:gap-6 w-full h-auto p-4  bg-white  cursor-pointer  hover:shadow-lg transition-all duration-300 col-span-12 lg:col-span-6"
+										onClick={() => {
+											Router.push(`/jobs/${item.id}`);
+										}}
+									>
+										<div className="w-12 h-12 lg:w-14 lg:h-1w-14">
+											<Image
+												src={TravelokaIcon}
+												alt=""
+												width="0"
+												height="0"
+												className="w-full h-full"
+											></Image>
+										</div>
+										<div className="sm:flex sm:justify-between w-full">
+											<div className="py-1 flex flex-col justify-between">
+												<div>
+													<h1 className="font-bold text-lg lg:text-xl">
+														{item.title}
+													</h1>
+													<div className="flex gap-3 text-gray-500  lg:text-md ">
+														<p>{item.company}</p>
+														<p>{item.location}</p>
+													</div>
+													<span className="mb-3 text-blue-600 text-md">
+														IDR {item.salary}
+													</span>
+												</div>
+												<div className="flex gap-3 ">
+													<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full text-sm">
+														{item.type}
+													</span>
+													|{" "}
+													<span className="py-1 px-3  text-yellow-400 border border-yellow-400 font-bold rounded-full text-sm">
+														Marketing
+													</span>
+												</div>
 											</div>
-											<div className="flex gap-3 ">
-												<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full">
-													{item.type}
-												</span>
-												|{" "}
-												<span className="py-1 px-3  text-yellow-400 border border-yellow-400 font-bold rounded-full">
-													Marketing
-												</span>
+											<div>
+												<button className="w-full py-3 mt-3 bg-blue-700 text-white font-bold">
+													Apply
+												</button>
+												<LoadingBar
+													progress={item.applied}
+													total={item.capacity}
+												/>
+												<p className="mt-3">
+													<span className="font-bold">
+														{item.applied} applied
+													</span>{" "}
+													of {item.capacity} capacity
+												</p>
 											</div>
 										</div>
-										<div>
-											<button className="w-full py-3 mt-3 bg-blue-700 text-white font-bold">
-												Apply
-											</button>
-											<LoadingBar
-												progress={item.applied}
-												total={item.capacity}
-											/>
-											<p className="mt-3">
-												<span className="font-bold">
-													{item.applied} applied
-												</span>{" "}
-												of {item.capacity} capacity
-											</p>
-										</div>
 									</div>
-								</div>
-							))}
+								))}
+							</div>
 						</div>
 					) : (
-						<div className="col-span-12 min-h-screen  flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-9 ">
+						<div className="col-span-10 min-h-screen  flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">
 							<div role="" className="mt-10">
 								<svg
 									aria-hidden="true"
