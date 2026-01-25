@@ -6,6 +6,14 @@ import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import Image from "next/image";
 
 import TravelokaIcon from "public/img/icon/trav.png";
+import AirBnb from "public/img/icon/zzz.jpeg"
+import Amazon from "public/img/icon/amazon.png"
+import Facebook from "public/img/icon/unnamed.png"
+import GrabLogo from "public/img/icon/grab2.jpeg"
+import Netflix from "public/img/icon/Netflix-Symbol.png"
+import Alibaba from "public/img/icon/alibaba2.jpeg"
+import Goto from "public/img/icon/976805306.webp"
+import Shopee from "public/img/icon/shopee_logo.jpeg"
 
 import LoadingBar from "@/components/elements/jobs/LoadingBar";
 import { useRouter } from "next/router";
@@ -24,54 +32,44 @@ const allJobs = [
 	},
 	{
 		id: 2,
-		logo: TravelokaIcon,
+		logo: AirBnb,
 		title: "Brand Designer",
 		company: "Dropbox",
 		location: "Yogyakarta",
 		type: "Freelance",
-		applied: 3,
+		applied: 10,
 		capacity: 10,
 		salary: "8.000.000 - 12.000.000",
 	},
-	{
-		id: 3,
-		logo: TravelokaIcon,
-		title: "Interative Developer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-		applied: 6,
-		capacity: 12,
-		salary: "6.000.000 - 8.000.000",
-	},
+
 	{
 		id: 4,
-		logo: TravelokaIcon,
+		logo: Facebook,
 		title: "HR Manager",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
+		company: "Uniqlo",
+		location: "London",
+		type: "Freelance",
 		applied: 2,
-		capacity: 10,
+		capacity: 16,
 		salary: "9.000.000 - 12.000.000",
 	},
 	{
 		id: 5,
-		logo: TravelokaIcon,
+		logo: GrabLogo,
 		title: "Brand Designer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
+		company: "Grab",
+		location: "Singapore",
+		type: "Freelance",
 		applied: 9,
 		capacity: 20,
 		salary: "7.000.000 - 9.000.000",
 	},
 	{
 		id: 6,
-		logo: TravelokaIcon,
+		logo: Netflix,
 		title: "Accountant",
-		company: "Airbnb",
-		location: "Jakarta",
+		company: "Netflix",
+		location: "Surabaya",
 		type: "Full Time",
 		applied: 6,
 		capacity: 10,
@@ -79,25 +77,36 @@ const allJobs = [
 	},
 	{
 		id: 7,
-		logo: TravelokaIcon,
-		title: "Social Media Assistant",
-		company: "Airbnb",
-		location: "Jakarta",
+		logo: Shopee,
+		title: "UI/UX Internship",
+		company: "Shopee",
+		location: "Jakarta Selatan",
 		type: "Full Time",
 		applied: 6,
 		capacity: 10,
-		salary: "8.000.000 - 13.000.000",
+		salary: "12.000.000 - 13.000.000",
 	},
 	{
 		id: 8,
-		logo: TravelokaIcon,
+		logo: Alibaba,
 		title: "Backend Developer",
-		company: "Airbnb",
+		company: "Alibaba",
 		location: "Jakarta",
-		type: "Full Time",
+		type: "Freelance",
 		applied: 1,
 		capacity: 5,
 		salary: "5.000.000 - 7.000.000",
+	},
+	{
+		id: 8,
+		logo: Goto,
+		title: "DevOps Specialist",
+		company: "Goto",
+		location: "Jakarta",
+		type: "Freelance",
+		applied: 5,
+		capacity: 5,
+		salary: "20.000.000 - 21.000.000",
 	},
 ];
 const Jobs = () => {
@@ -197,20 +206,18 @@ const Jobs = () => {
 									Type of employment
 								</h1>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										typeEmployee
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
-									}`}
+									className={`cursor-pointer ${typeEmployee
+										? "rotate-180 transition-all duration-150 ease-in"
+										: "transition-all duration-150 ease-in"
+										}`}
 								/>
 							</div>
 							<div className="mt-3  overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
-										typeEmployee
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
-									}`}
+									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${typeEmployee
+										? " block translate-y-0 "
+										: "absolute -top-[200rem] -translate-y-full "
+										}`}
 								>
 									<div className="flex items-center mb-4">
 										<input
@@ -310,20 +317,18 @@ const Jobs = () => {
 									Categories
 								</h1>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										categories
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
-									}`}
+									className={`cursor-pointer ${categories
+										? "rotate-180 transition-all duration-150 ease-in"
+										: "transition-all duration-150 ease-in"
+										}`}
 								/>
 							</div>
 							<div className="mt-3  overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
-										categories
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
-									}`}
+									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${categories
+										? " block translate-y-0 "
+										: "absolute -top-[200rem] -translate-y-full "
+										}`}
 								>
 									<div className="flex items-center mb-4">
 										<input
@@ -474,20 +479,18 @@ const Jobs = () => {
 									Job Lebel
 								</h1>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										jobLevel
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
-									}`}
+									className={`cursor-pointer ${jobLevel
+										? "rotate-180 transition-all duration-150 ease-in"
+										: "transition-all duration-150 ease-in"
+										}`}
 								/>
 							</div>
 							<div className="mt-3  overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
-										jobLevel
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
-									}`}
+									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${jobLevel
+										? " block translate-y-0 "
+										: "absolute -top-[200rem] -translate-y-full "
+										}`}
 								>
 									<div className="flex items-center mb-4">
 										<input
@@ -587,20 +590,18 @@ const Jobs = () => {
 									Salary
 								</h1>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										salary
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
-									}`}
+									className={`cursor-pointer ${salary
+										? "rotate-180 transition-all duration-150 ease-in"
+										: "transition-all duration-150 ease-in"
+										}`}
 								/>
 							</div>
 							<div className="mt-3  overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
-										salary
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
-									}`}
+									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${salary
+										? " block translate-y-0 "
+										: "absolute -top-[200rem] -translate-y-full "
+										}`}
 								>
 									<div className="flex items-center mb-4">
 										<input
@@ -690,67 +691,98 @@ const Jobs = () => {
 									</span>
 								</div>
 							</div>
-							<div className="grid grid-cols-12 gap-3">
+							<div className="grid grid-cols-12 gap-6">
 								{allJobs.map((item) => (
 									<div
 										key={item.id}
-										className="flex flex-col border md:flex-row md:items-center md:gap-6 w-full h-auto p-4  bg-white  cursor-pointer  hover:shadow-lg transition-all duration-300 col-span-12 lg:col-span-6"
-										onClick={() => {
-											Router.push(`/jobs/${item.id}`);
-										}}
+										onClick={() => Router.push(`/jobs/${item.id}`)}
+										className="
+        group col-span-12 cursor-pointer rounded-xl border bg-white p-5
+        transition-all duration-300
+        hover:-translate-y-1 hover:shadow-xl
+        md:col-span-12 lg:col-span-6
+      "
 									>
-										<div className="w-12 h-12 lg:w-14 lg:h-1w-14">
-											<Image
-												src={TravelokaIcon}
-												alt=""
-												width="0"
-												height="0"
-												className="w-full h-full"
-											></Image>
-										</div>
-										<div className="sm:flex sm:justify-between w-full">
-											<div className="py-1 flex flex-col justify-between">
-												<div>
-													<h1 className="font-bold text-lg lg:text-xl">
-														{item.title}
-													</h1>
-													<div className="flex gap-3 text-gray-500  lg:text-md ">
-														<p>{item.company}</p>
-														<p>{item.location}</p>
-													</div>
-													<span className="mb-3 text-blue-600 text-md">
-														IDR {item.salary}
-													</span>
-												</div>
-												<div className="flex gap-3 ">
-													<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full text-sm">
-														{item.type}
-													</span>
-													|{" "}
-													<span className="py-1 px-3  text-yellow-400 border border-yellow-400 font-bold rounded-full text-sm">
-														Marketing
-													</span>
-												</div>
-											</div>
-											<div>
-												<button className="w-full py-3 mt-3 bg-blue-700 text-white font-bold">
-													Apply
-												</button>
-												<LoadingBar
-													progress={item.applied}
-													total={item.capacity}
+										<div className="flex flex-col gap-5 md:flex-row md:items-start">
+											{/* Logo */}
+											<div className="
+          flex h-14 w-14 shrink-0 items-center justify-center
+          rounded-lg border 
+        ">
+												<Image
+													src={item.logo}
+													alt={item.company}
+													width={56}
+													height={56}
+													className="object-cover"
 												/>
-												<p className="mt-3">
-													<span className="font-bold">
-														{item.applied} applied
-													</span>{" "}
-													of {item.capacity} capacity
-												</p>
+											</div>
+
+											{/* Content */}
+											<div className="flex w-full flex-col gap-4 md:flex-row md:justify-between">
+												{/* Left */}
+												<div>
+													<h3 className="text-lg font-semibold lg:text-xl">
+														{item.title}
+													</h3>
+
+													<div className="mt-1 flex flex-wrap gap-3 text-sm text-gray-500">
+														<span>{item.company}</span>
+														<span>•</span>
+														<span>{item.location}</span>
+													</div>
+
+													<p className="mt-2 text-base font-semibold text-blue-700">
+														IDR {item.salary}
+													</p>
+
+													<div className="mt-4 flex flex-wrap items-center gap-3">
+
+														<span className={`rounded-full px-3 py-1 text-xs font-semibold  ${item.type === 'Freelance' ? 'bg-green-100 text-green-700 ' : 'bg-yellow-100 text-yellow-700'}`}>
+															{item.type}
+														</span>
+
+														<span className="
+                rounded-full border border-yellow-400 px-3 py-1 text-xs font-semibold text-yellow-500
+              ">
+															Marketing
+														</span>
+													</div>
+												</div>
+
+												{/* Right */}
+												<div className="flex w-full flex-col gap-3 md:max-w-[220px]">
+													<button
+														onClick={(e) => {
+															e.stopPropagation();
+															Router.push(`/jobs/${item.id}`);
+														}}
+														className="
+                rounded-lg bg-blue-700 py-3 text-sm font-semibold text-white
+                transition hover:bg-blue-800
+              "
+													>
+														Apply Now
+													</button>
+
+													<LoadingBar
+														progress={item.applied}
+														total={item.capacity}
+													/>
+
+													<p className="text-xs text-gray-500">
+														<span className="font-semibold text-gray-700">
+															{item.applied}
+														</span>{" "}
+														applied of {item.capacity} capacity
+													</p>
+												</div>
 											</div>
 										</div>
 									</div>
 								))}
 							</div>
+
 						</div>
 					) : (
 						<div className="col-span-10 min-h-screen  flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">

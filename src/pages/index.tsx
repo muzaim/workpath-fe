@@ -244,11 +244,10 @@ export default function Home() {
 						<h1 className="font-bold text-5xl text-sky-400 font-poppins leading-relaxed tracking-tighter lg:text-7xl">
 							5000+ Jobs
 						</h1>
-						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto lg:text-xl">
-							Lorem ipsum dolor, sit amet consectetur adipisicing
-							elit. Animi, illo dolore soluta maxime officia,
-							cupiditate at dolores.
+						<p className="text-center text-gray-600 mt-3 font-poppins w-full sm:w-3/4 mx-auto lg:text-xl">
+							A platform that connects job seekers with the right opportunities, helping them find meaningful work and grow their careers.
 						</p>
+
 						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/4 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
 							<div className="flex justify-center items-center gap-1 w-full">
 								<BsSearch />
@@ -298,97 +297,101 @@ export default function Home() {
 				</div>
 			</div>
 			{/* COMPANIES */}
-			<div className="px-4 md:container md:mx-auto py-10 ">
-				<h1 className="text-lg font-poppins text-gray-500 mb-10">
+			{/* <div className="px-4 py-16 md:container md:mx-auto">
+				<h2 className="mb-12 text-center text-sm font-semibold tracking-widest text-gray-400 uppercase">
 					Companies we helped grow
-				</h1>
-				<div className="flex gap-3 flex-wrap justify-center items-center lg:justify-between">
-					<Image
-						src={AmazonIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
-					<Image
-						src={AirBnbIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
-					<Image
-						src={FacebookIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
-					<Image
-						src={GoogleIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
-					<Image
-						src={GrabIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
-					<Image
-						src={NetflixIcon}
-						alt="me"
-						width="0"
-						height="0"
-						sizes="100vw"
-						className="w-20 sm:w-24 md:w-28"
-					/>
+				</h2>
+
+				<div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-8 lg:justify-between">
+					{[
+						AmazonIcon,
+						AirBnbIcon,
+						FacebookIcon,
+						GoogleIcon,
+						GrabIcon,
+						NetflixIcon,
+					].map((logo, idx) => (
+						<Image
+							key={idx}
+							src={logo}
+							alt="company logo"
+							width={120}
+							height={60}
+							className="
+          w-20 sm:w-24 md:w-28
+          grayscale opacity-70
+          transition-all duration-300
+          hover:grayscale-0 hover:opacity-100
+        "
+						/>
+					))}
 				</div>
-			</div>
+			</div> */}
+
 			{/* SEARCH BY CATEGORY */}
-			<div className="px-4 md:container md:mx-auto  pb-10">
-				<div className="flex justify-between items-center">
-					<h1 className="text-xl font-poppins font-semibold mb-5 lg:text-2xl">
-						Explore by{" "}
-						<span className="text-blue-700">category</span>
-					</h1>
-					<span className=" items-center gap-3 text-blue-700 font-bold hidden cursor-pointer md:flex lg:text-xl">
-						Shows all jobs <FiArrowRight />
+			<div className="mt-16 px-4 pb-12 md:container md:mx-auto">
+				{/* Header */}
+				<div className="mb-10 flex items-center justify-between">
+					<h2 className="text-xl font-semibold font-poppins lg:text-2xl">
+						Explore by <span className="text-blue-700">Category</span>
+					</h2>
+
+					<span className="hidden cursor-pointer items-center gap-2 text-sm font-semibold text-blue-700 transition hover:gap-3 md:flex lg:text-base">
+						Show all jobs <FiArrowRight />
 					</span>
 				</div>
-				<div className="grid grid-cols-12 gap-5">
+
+				{/* Grid */}
+				<div className="grid grid-cols-12 gap-6">
 					{dataCategory.map((item) => (
 						<div
 							key={item.id}
-							className="flex items-end justify-between gap-3 border px-3 py-5 group hover:bg-blue-700 transition-all duration-150 rounded-lg col-span-12 md:col-span-6 lg:col-span-3 cursor-pointer "
+							className="
+          group col-span-12 cursor-pointer rounded-xl border bg-white
+          px-5 py-6 transition-all duration-300
+          hover:-translate-y-1 hover:border-blue-700 hover:bg-blue-700
+          hover:shadow-lg
+          md:col-span-6 lg:col-span-3
+        "
 						>
-							<div className="flex gap-8 items-center lg:flex-col md:items-center md:gap-4 lg:items-start">
-								<div className="w-8 h-8 ">{item.logo}</div>
-								<div>
-									<h1 className="font-bold text-lg group-hover:text-white">
-										{item.name}
-									</h1>
-									<p className="text-gray-500 text-md group-hover:text-white">
-										{item.count} jobs availabe
-									</p>
+							<div className="flex items-start justify-between">
+								<div className="flex items-start gap-4">
+									{/* Icon */}
+									<div className="
+              flex h-10 w-10 items-center justify-center rounded-lg
+              bg-blue-50 text-blue-700
+              group-hover:bg-white group-hover:text-blue-700
+            ">
+										{item.logo}
+									</div>
+
+									{/* Text */}
+									<div>
+										<h3 className="text-lg font-semibold group-hover:text-white">
+											{item.name}
+										</h3>
+										<p className="mt-1 text-sm text-gray-500 group-hover:text-blue-100">
+											{item.count} jobs available
+										</p>
+									</div>
 								</div>
+
+								{/* Arrow */}
+								<FiArrowRight className="
+            text-xl text-gray-400 transition-all
+            group-hover:translate-x-1 group-hover:text-white
+          " />
 							</div>
-							<FiArrowRight className="text-xl group-hover:text-white" />
 						</div>
 					))}
 				</div>
-				<span className="flex items-center gap-3 text-blue-700 font-bold mt-5 md:hidden cursor-pointer ">
-					Shows all jobs <FiArrowRight />
+
+				{/* Mobile CTA */}
+				<span className="mt-8 flex cursor-pointer items-center justify-center gap-2 text-sm font-semibold text-blue-700 md:hidden">
+					Show all jobs <FiArrowRight />
 				</span>
 			</div>
+
 			{/* START POSTING JOB */}
 			<div className="px-4  bg-blue-700 py-20 ">
 				<div className="container mx-auto md:grid md:grid-cols-12 md:gap-3 md:items-center bg">
