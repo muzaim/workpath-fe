@@ -13,17 +13,10 @@ import { PiMoneyLight } from "react-icons/pi";
 import { FiMonitor, FiArrowRight } from "react-icons/fi";
 import { FaBusinessTime } from "react-icons/fa";
 
-import AirBnbIcon from "public/img/icon/airbnb 1.png";
-import AmazonIcon from "/public/img/icon/amazon.png";
-import FacebookIcon from "/public/img/icon/facebook.png";
-import GoogleIcon from "/public/img/icon/google.png";
-import GrabIcon from "/public/img/icon/grab-logo.png";
-import NetflixIcon from "/public/img/icon/netflix.png";
 import Girl from "/public/img/util/girl.png";
 import Nadia from "/public/img/util/nadia.png";
-
-import TravelokaIcon from "public/img/icon/trav.png";
 import { useRouter } from "next/router";
+import { allJobs } from "@/data/jobs";
 
 const dataCategory = [
 	{
@@ -92,142 +85,26 @@ const dataCategory = [
 	},
 ];
 
-const featuredJobs = [
-	{
-		id: 1,
-		logo: TravelokaIcon,
-		title: "Frontend Developer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 2,
-		logo: TravelokaIcon,
-		title: "Backend Developer",
-		company: "Dlitch",
-		location: "Madrid, Spain",
-		type: "Full Time",
-	},
-	{
-		id: 3,
-		logo: TravelokaIcon,
-		title: "Admin",
-		company: "Traveloka",
-		location: "Ankara",
-		type: "Freelance",
-	},
-	{
-		id: 4,
-		logo: TravelokaIcon,
-		title: "Product Designer",
-		company: "ClassPass",
-		location: "Jawa Timur",
-		type: "Full Time",
-	},
-	{
-		id: 5,
-		logo: TravelokaIcon,
-		title: "Lead Engineer",
-		company: "Airbnb",
-		location: "Surabaya",
-		type: "Full Time",
-	},
-	{
-		id: 6,
-		logo: TravelokaIcon,
-		title: "Android Developer",
-		company: "Shopee",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 7,
-		logo: TravelokaIcon,
-		title: "Brand Designer",
-		company: "Tokopedia",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 8,
-		logo: TravelokaIcon,
-		title: "Email Marketing",
-		company: "Rusdi",
-		location: "Jakarta",
-		type: "Freelance",
-	},
-];
-
-const latestJob = [
-	{
-		id: 1,
-		logo: TravelokaIcon,
-		title: "Social Media Assistant",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 2,
-		logo: TravelokaIcon,
-		title: "Brand Designer",
-		company: "Dropbox",
-		location: "Yogyakarta",
-		type: "Freelance",
-	},
-	{
-		id: 3,
-		logo: TravelokaIcon,
-		title: "Interative Developer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 4,
-		logo: TravelokaIcon,
-		title: "HR Manager",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 5,
-		logo: TravelokaIcon,
-		title: "Brand Designer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 6,
-		logo: TravelokaIcon,
-		title: "Accountant",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 7,
-		logo: TravelokaIcon,
-		title: "Social Media Assistant",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-	{
-		id: 8,
-		logo: TravelokaIcon,
-		title: "Backend Developer",
-		company: "Airbnb",
-		location: "Jakarta",
-		type: "Full Time",
-	},
-];
-
 export default function Home() {
 	const router = useRouter();
+	const featuredJobs = allJobs.filter((job) => job.featured).slice(0, 8);
+	const latestJob = allJobs.slice(0, 8);
+
+	const getHighlight = (job: (typeof allJobs)[number]) => {
+		if (job.featured) {
+			return "Featured";
+		}
+
+		if (job.workSetup === "Remote") {
+			return "Remote";
+		}
+
+		if (job.posting === "Today") {
+			return "New";
+		}
+
+		return "Hot Role";
+	};
 	return (
 		<>
 			{/* HERO */}
@@ -424,8 +301,11 @@ export default function Home() {
 					<h1 className="text-xl font-poppins font-semibold lg:text-4xl">
 						Featured <span className="text-blue-700">jobs</span>
 					</h1>
-					<span className=" items-center gap-3 text-blue-700 font-bold  cursor-pointer flex lg:text-xl">
-						Shows all jobs <FiArrowRight />
+					<span
+						className=" items-center gap-3 text-blue-700 font-bold  cursor-pointer flex lg:text-xl"
+						onClick={() => router.push("/jobs")}
+					>
+						Show all jobs <FiArrowRight />
 					</span>
 				</div>
 				<div className="lg:hidden">
@@ -459,41 +339,52 @@ export default function Home() {
 					>
 						{featuredJobs.map((item) => (
 							<SwiperSlide key={item.id} className="py-5 ">
-								<div className=" w-full  h-[15rem] border p-4 flex flex-col justify-between hover:shadow-lg">
+								<div
+									className="group flex h-[18rem] w-full cursor-pointer flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+									onClick={() => router.push(`/jobs/${item.id}`)}
+								>
 									<div className="flex gap-3 items-center justify-between ">
-										<div className="w-[3rem] ">
-											{/* {item.logo} */}
+										<div className="flex h-14 w-14 items-center justify-center rounded-lg border border-slate-200 bg-white">
 											<Image
-												src={TravelokaIcon}
-												alt=""
-												width="0"
-												height="0"
-												className="w-full h-full"
-											></Image>
+												src={item.logo}
+												alt={item.company}
+												width={56}
+												height={56}
+												className="h-10 w-10 object-contain"
+											/>
 										</div>
-										<h1 className="font-bold text-lg border py-2 px-3 border-blue-700 text-blue-700">
-											{item.type}
-										</h1>
+										<div className="flex flex-col items-end gap-2">
+											<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+												{getHighlight(item)}
+											</span>
+											<h1 className="border border-blue-700 px-3 py-1 text-sm font-bold text-blue-700">
+												{item.type}
+											</h1>
+										</div>
 									</div>
 									<div>
-										<h1 className="font-bold text-2xl">
+										<h1 className="text-2xl font-bold transition-colors group-hover:text-blue-700">
 											{item.title}
 										</h1>
-										<div className="flex gap-3 text-gray-500">
+										<div className="mt-1 flex gap-3 text-gray-500">
 											<p>{item.company}</p>
+											<p>•</p>
 											<p>{item.location}</p>
 										</div>
-										<p className="py-2">
-											{item.company} is loking for{" "}
-											{item.title} to help the team.
+										<p className="py-3 text-sm text-gray-500">
+											{item.company} is looking for a {item.title.toLowerCase()} to
+											help drive product quality and execution.
+										</p>
+										<p className="text-sm font-semibold text-blue-700">
+											{item.salary}
 										</p>
 									</div>
 									<div className="flex gap-3">
-										<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full">
-											Design
+										<span className="rounded-full bg-green-200 px-3 py-1 font-bold text-green-700">
+											{item.category}
 										</span>
-										<span className="py-1 px-3 bg-sky-200 text-sky-700 font-bold rounded-full">
-											Business
+										<span className="rounded-full bg-sky-200 px-3 py-1 font-bold text-sky-700">
+											{item.id % 2 === 0 ? "Mid Level" : "Senior Level"}
 										</span>
 									</div>
 								</div>
@@ -505,42 +396,51 @@ export default function Home() {
 					{featuredJobs.map((item) => (
 						<div
 							key={item.id}
-							className="w-[22rem]  h-[15rem] border p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300"
+							className="group flex h-[18rem] w-[22rem] cursor-pointer flex-col justify-between rounded-xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+							onClick={() => router.push(`/jobs/${item.id}`)}
 						>
 							<div className="flex gap-3 items-center justify-between ">
-								<div className="w-[3rem] ">
-									{/* {item.logo} */}
+								<div className="flex h-14 w-14 items-center justify-center rounded-lg border border-slate-200 bg-white">
 									<Image
-										src={TravelokaIcon}
-										alt=""
-										width="0"
-										height="0"
-										className="w-full h-full"
-									></Image>
+										src={item.logo}
+										alt={item.company}
+										width={56}
+										height={56}
+										className="h-10 w-10 object-contain"
+									/>
 								</div>
-								<h1 className="font-bold text-lg border py-2 px-3 border-blue-700 text-blue-700">
-									{item.type}
-								</h1>
+								<div className="flex flex-col items-end gap-2">
+									<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+										{getHighlight(item)}
+									</span>
+									<h1 className="border border-blue-700 px-3 py-1 text-sm font-bold text-blue-700">
+										{item.type}
+									</h1>
+								</div>
 							</div>
 							<div>
-								<h1 className="font-bold text-2xl">
+								<h1 className="text-2xl font-bold transition-colors group-hover:text-blue-700">
 									{item.title}
 								</h1>
-								<div className="flex gap-3 text-gray-500">
+								<div className="mt-1 flex gap-3 text-gray-500">
 									<p>{item.company}</p>
+									<p>•</p>
 									<p>{item.location}</p>
 								</div>
-								<p className="py-2">
-									{item.company} is loking for {item.title} to
-									help the team.
+								<p className="py-3 text-sm text-gray-500">
+									{item.company} is looking for a {item.title.toLowerCase()} to
+									help drive product quality and execution.
+								</p>
+								<p className="text-sm font-semibold text-blue-700">
+									{item.salary}
 								</p>
 							</div>
 							<div className="flex gap-3">
-								<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full">
-									Design
+								<span className="rounded-full bg-green-200 px-3 py-1 font-bold text-green-700">
+									{item.category}
 								</span>
-								<span className="py-1 px-3 bg-sky-200 text-sky-700 font-bold rounded-full">
-									Business
+								<span className="rounded-full bg-sky-200 px-3 py-1 font-bold text-sky-700">
+									{item.id % 2 === 0 ? "Mid Level" : "Senior Level"}
 								</span>
 							</div>
 						</div>
@@ -555,8 +455,11 @@ export default function Home() {
 							Latest{" "}
 							<span className="text-blue-700">jobs open</span>
 						</h1>
-						<span className=" items-center gap-3 text-blue-700 font-bold  cursor-pointer flex lg:text-xl">
-							Shows all jobs <FiArrowRight />
+						<span
+							className=" items-center gap-3 text-blue-700 font-bold  cursor-pointer flex lg:text-xl"
+							onClick={() => router.push("/jobs")}
+						>
+							Show all jobs <FiArrowRight />
 						</span>
 					</div>
 				</div>
@@ -564,32 +467,52 @@ export default function Home() {
 					{latestJob.map((item) => (
 						<div
 							key={item.id}
-							className="flex pb-5 flex-col md:flex-row md:items-center md:gap-6 w-full h-[10rem] p-4 bg-white col-span-12 md:col-span-6 hover:shadow-lg transition-all duration-300"
+							className="group col-span-12 flex w-full cursor-pointer flex-col gap-4 rounded-xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:col-span-6 md:flex-row md:items-center md:gap-5"
+							onClick={() => router.push(`/jobs/${item.id}`)}
 						>
-							<div className="w-12 h-12 lg:w-14 lg:h-1w-14">
+							<div className="flex h-14 w-14 items-center justify-center rounded-lg border border-slate-200 bg-white">
 								<Image
-									src={TravelokaIcon}
-									alt=""
-									width="0"
-									height="0"
-									className="w-full h-full"
-								></Image>
+									src={item.logo}
+									alt={item.company}
+									width={56}
+									height={56}
+									className="h-10 w-10 object-contain"
+								/>
 							</div>
-							<div>
-								<h1 className="font-bold text-lg lg:text-xl">
-									{item.title}
-								</h1>
-								<div className="flex gap-3 text-gray-500 mt-1 mb-2 lg:text-lg">
-									<p>{item.company}</p>
-									<p>{item.location}</p>
+							<div className="flex w-full flex-col gap-3 md:flex-row md:items-start md:justify-between">
+								<div>
+									<div className="mb-2 flex flex-wrap items-center gap-2">
+										<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+											{item.posting}
+										</span>
+										<span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+											{item.category}
+										</span>
+									</div>
+									<h1 className="font-bold text-lg lg:text-xl group-hover:text-blue-700 transition-colors">
+										{item.title}
+									</h1>
+									<div className="mt-1 flex flex-wrap gap-3 text-gray-500 lg:text-lg">
+										<p>{item.company}</p>
+										<p>•</p>
+										<p>{item.location}</p>
+									</div>
+									<p className="mt-2 text-sm text-gray-500">
+										{item.company} is looking for a {item.title.toLowerCase()} to
+										support growing team initiatives.
+									</p>
+									<div className="mt-3 flex flex-wrap gap-3">
+										<span className="rounded-full bg-green-200 px-3 py-1 font-bold text-green-700">
+											{item.type}
+										</span>
+										<span className="rounded-full border border-yellow-400 px-3 py-1 font-bold text-yellow-500">
+											{item.workSetup}
+										</span>
+									</div>
 								</div>
-								<div className="flex gap-3 ">
-									<span className="py-1 px-3 bg-green-200 text-green-700 font-bold rounded-full">
-										{item.type}
-									</span>
-									|{" "}
-									<span className="py-1 px-3  text-yellow-400 border border-yellow-400 font-bold rounded-full">
-										Marketing
+								<div className="flex items-center md:h-full">
+									<span className="rounded-lg bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600">
+										{item.applied} applicants
 									</span>
 								</div>
 							</div>

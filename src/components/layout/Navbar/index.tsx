@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import styles from "./Navbar.module.scss";
+import Image from "next/image";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -16,24 +15,23 @@ const Navbar = () => {
 	const router = useRouter();
 	const [showFullNav, setShowFullNav] = useState(true);
 
-	const bodyOverflowClass = showFullNav ? "no-scroll" : "";
 	return (
 		<>
 			<div
-				className={`fixed w-full h-20 px-4 z-[99999] flex justify-between items-center bg-gray-100 md:px-0  md:bg-white shadow-lg ${bodyOverflowClass}`}
+				className="fixed z-[99999] flex h-20 w-full items-center justify-between border-b border-slate-200/70 bg-gray-100/95 px-4 shadow-lg backdrop-blur md:bg-white/95 md:px-0"
 			>
-				<div className="md:container md:mx-auto flex justify-between items-center ">
+				<div className="md:container md:mx-auto flex w-full justify-between items-center">
 					{/* logo */}
-					<div className="flex gap-10 justify-center items-center ">
+					<div className="flex items-center justify-center gap-10">
 						<div
-							className="flex gap-1 justify-center items-center relative cursor-pointer"
+							className="relative flex cursor-pointer items-center justify-center gap-1"
 							onClick={() => push("/")}
 						>
-							<div className="w-9 h-9 bg-blue-700 rounded-full z-10 flex justify-center items-center">
-								<div className="w-4 h-4 bg-white rounded-full"></div>
+							<div className="z-10 flex h-9 w-9 items-center justify-center rounded-full bg-blue-700 shadow-sm">
+								<div className="h-4 w-4 rounded-full bg-white"></div>
 							</div>
-							<div className="w-9 h-9 bg-blue-400 rounded-full absolute -top-2 -left-2 "></div>
-							<span className="text-xl font-bold text-blue-700  font-poppins">
+							<div className="absolute -left-2 -top-2 h-9 w-9 rounded-full bg-blue-400 opacity-80"></div>
+							<span className="font-poppins text-xl font-bold text-blue-700">
 								WorkPath
 							</span>
 						</div>
@@ -48,14 +46,18 @@ const Navbar = () => {
 									<li
 										key={key}
 										className={`
-          relative h-20 flex items-center
+          relative flex h-20 items-center
           transition-colors duration-300
           ${isActive ? "text-blue-700" : "text-gray-600"}
         `}
 									>
 										<Link
 											href={href}
-											className="capitalize hover:text-blue-700"
+											className={`rounded-full px-3 py-2 capitalize transition-all duration-300 ${
+												isActive
+													? "bg-blue-50 text-blue-700"
+													: "hover:bg-slate-100 hover:text-blue-700"
+											}`}
 										>
 											{label}
 										</Link>
@@ -79,7 +81,7 @@ const Navbar = () => {
 							<Link
 								href="/login"
 								className="
-        rounded-md px-5 py-2.5
+        rounded-lg px-5 py-2.5
         text-blue-700
         border border-blue-700/30
         hover:border-blue-700
@@ -95,7 +97,7 @@ const Navbar = () => {
 							<Link
 								href="/signup"
 								className="
-        rounded-md px-5 py-2.5
+        rounded-lg px-5 py-2.5
         bg-blue-700 text-white
         shadow-sm
         hover:bg-blue-800
@@ -122,13 +124,13 @@ const Navbar = () => {
 							></div>
 						)}
 						<div
-							className={`md:hidden fixed top-0  w-[80%] h-screen bg-blue-600 z-[99999] transition-all duration-300 ease-in-out ${showFullNav ? "-right-[100rem]" : "right-0"
+							className={`md:hidden fixed top-0  w-[80%] h-screen bg-blue-700 z-[99999] transition-all duration-300 ease-in-out ${showFullNav ? "-right-[100rem]" : "right-0"
 								}`}
 						>
 							<div>
-								<div className="relative h-20 px-4 flex justify-end items-center bg-blue-600 md:px-0 md:container md:mx-auto md:bg-white">
+								<div className="relative flex h-20 items-center justify-end bg-blue-700 px-4 md:container md:mx-auto md:bg-white md:px-0">
 									<div
-										className=" w-10 h-10 flex items-center justify-center bg-white text-blue-700  rounded-xl border border-transparent hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 transition duration-300"
+										className="flex h-10 w-10 items-center justify-center rounded-xl border border-transparent bg-white text-blue-700 transition duration-300 hover:border-blue-700 hover:bg-white hover:text-blue-700"
 										onClick={() =>
 											setShowFullNav(!showFullNav)
 										}
@@ -141,14 +143,18 @@ const Navbar = () => {
 										/>
 									</div>
 								</div>
-								<div className="h-screen w-full px-8 py-6 bg-blue-700">
+								<div className="h-screen w-full bg-blue-700 px-8 py-6">
 									{/* Profile */}
-									<div className="flex items-center gap-4 pb-6 border-b border-white/20">
-										<img
-											src="https://asset-a.grid.id/crop/0x0:1080x763/945x630/photo/2023/03/26/inspirasi-warna-rambut-ala-lisa-20230326025321.jpg"
-											alt="profile"
-											className="h-14 w-14 rounded-full object-cover border-2 border-white"
-										/>
+									<div className="flex items-center gap-4 border-b border-white/20 pb-6">
+										<div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-white">
+											<Image
+												src="https://asset-a.grid.id/crop/0x0:1080x763/945x630/photo/2023/03/26/inspirasi-warna-rambut-ala-lisa-20230326025321.jpg"
+												alt="profile"
+												fill
+												unoptimized
+												className="object-cover"
+											/>
+										</div>
 										<div>
 											<h1 className="text-lg font-bold text-white uppercase">
 												Nadia
@@ -172,12 +178,7 @@ const Navbar = () => {
 													router.push("/jobs");
 													setShowFullNav(false);
 												}}
-												className="
-          group flex cursor-pointer items-center gap-4
-          rounded-lg px-4 py-3
-          text-white transition
-          hover:bg-white/10
-        "
+											className="group flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-white transition hover:bg-white/10"
 											>
 												<span className="text-xl">{item.icon}</span>
 												<span className="text-base font-medium">
@@ -192,12 +193,7 @@ const Navbar = () => {
 												router.push("/jobs");
 												setShowFullNav(false);
 											}}
-											className="
-        mt-2 flex cursor-pointer items-center gap-4
-        rounded-lg px-4 py-3
-        text-red-200 transition
-        hover:bg-red-500/20
-      "
+											className="mt-2 flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-red-200 transition hover:bg-red-500/20"
 										>
 											<BiLogOutCircle className="text-xl" />
 											<span className="text-base font-semibold">
@@ -222,11 +218,7 @@ const Navbar = () => {
 													router.push(item.path);
 													setShowFullNav(false);
 												}}
-												className="
-          cursor-pointer rounded-lg px-4 py-3
-          text-sm font-bold uppercase text-white
-          transition hover:bg-white/10
-        "
+											className="cursor-pointer rounded-lg px-4 py-3 text-sm font-bold uppercase text-white transition hover:bg-white/10"
 											>
 												{item.label}
 											</li>
@@ -237,11 +229,7 @@ const Navbar = () => {
 									<hr className="my-6 border-white/20" />
 
 									{/* Language */}
-									<div className="
-    flex cursor-pointer items-center gap-3
-    rounded-lg px-4 py-3 text-white
-    hover:bg-white/10
-  ">
+									<div className="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-white hover:bg-white/10">
 										<BsGlobeAmericas />
 										<span className="font-semibold">EN</span>
 										<BsChevronDown />
@@ -254,7 +242,7 @@ const Navbar = () => {
 				</div>
 				<div className="md:hidden">
 					<div
-						className="w-10 h-10 flex items-center justify-center bg-blue-700 text-white rounded-xl border border-transparent hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 transition duration-300"
+						className="flex h-10 w-10 items-center justify-center rounded-xl border border-transparent bg-blue-700 text-white transition duration-300 hover:border-blue-700 hover:bg-white hover:text-blue-700"
 						onClick={() => setShowFullNav(!showFullNav)}
 					>
 						<RxHamburgerMenu

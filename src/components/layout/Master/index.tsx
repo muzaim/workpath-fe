@@ -6,7 +6,7 @@ type PropsType = {
 	children: React.ReactNode;
 };
 
-const disableNavbar = ["/auth/login", "/auth/register", "/404"];
+const disableNavbar = ["/auth/login", "/auth/register", "/login", "/signup", "/404"];
 const MasterLayout = (props: PropsType) => {
 	const { children } = props;
 	const { pathname } = useRouter();

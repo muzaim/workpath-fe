@@ -1,179 +1,130 @@
 import React, { useEffect, useState } from "react";
 
-import { GoLocation } from "react-icons/go";
-import { BsSearch, BsFilter } from "react-icons/bs";
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import Image from "next/image";
-
-import TravelokaIcon from "public/img/icon/trav.png";
-
-import LoadingBar from "@/components/elements/jobs/LoadingBar";
 import { useRouter } from "next/router";
+import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { BsFilter, BsSearch } from "react-icons/bs";
+import { GoLocation } from "react-icons/go";
 
-const allJobs = [
-	{
-		id: 1,
-		logo: TravelokaIcon,
-		company: "Airbnb",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 7,
-	},
-	{
-		id: 2,
-		logo: TravelokaIcon,
-		company: "Stripe",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 2,
-	},
-	{
-		id: 3,
-		logo: TravelokaIcon,
-		company: "Discord",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 16,
-	},
-	{
-		id: 4,
-		logo: TravelokaIcon,
-		company: "Truebill",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 6,
-	},
-	{
-		id: 5,
-		logo: TravelokaIcon,
-		company: "Coinbase",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 12,
-	},
-	{
-		id: 6,
-		logo: TravelokaIcon,
-		company: "Kraken",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 4,
-	},
-	{
-		id: 7,
-		logo: TravelokaIcon,
-		company: "Robinhood",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 1,
-	},
-	{
-		id: 8,
-		logo: TravelokaIcon,
-		company: "Airbnb",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 7,
-	},
-	{
-		id: 9,
-		logo: TravelokaIcon,
-		company: "Travelok",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 7,
-	},
-	{
-		id: 10,
-		logo: TravelokaIcon,
-		company: "Mayora",
-		desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi impedit qui voluptates assumenda, rem optio minima vel consectetur obcaecati blanditiis!",
-		job: 2,
-	},
-];
-const Jobs = () => {
+import { allCompanies } from "@/data/companies";
+
+const Companies = () => {
 	const [showType, setShowType] = useState(true);
 	const [showCompanySize, setShowCompanySize] = useState(true);
 	const [loading, setLoading] = useState(true);
-	const Router = useRouter();
+	const router = useRouter();
+
+	const featuredCompanies = allCompanies.length;
+	const remoteFriendly = allCompanies.filter(
+		(company) => company.workplace !== "Onsite"
+	).length;
+	const openRoles = allCompanies.reduce((total, company) => total + company.job, 0);
 
 	const handleClickFilter = () => {
 		setLoading(true);
-		setTimeout(() => {
+		window.setTimeout(() => {
 			setLoading(false);
-		}, 1500);
+		}, 1200);
 	};
 
 	useEffect(() => {
-		setTimeout(() => {
+		const timer = window.setTimeout(() => {
 			setLoading(false);
-		}, 1500);
+		}, 1200);
+
+		return () => window.clearTimeout(timer);
 	}, []);
+
 	return (
 		<>
-			{/* HERO */}
-			<div className="w-full pt-40 lg:pt-0 h-max pb-10 bg-hero bg-cover lg:pb-0">
-				<div className="px-4 grid grid-cols-12 md:container md:mx-auto items-center">
-					{/* KIRI */}
-					<div className="col-span-12 mt-5 md:col-span-12 text-center md:py-20 w-full mx-auto ">
-						<h1 className="font-bold text-5xl text-gray-700 font-poppins leading-tight tracking-tighter lg:text-7xl">
+			<div className="relative h-max w-full overflow-hidden bg-hero bg-cover pb-10 pt-24 lg:pb-0 lg:pt-0">
+				<div className="absolute inset-0 bg-gradient-to-b from-white/70 via-sky-50/75 to-white/90" />
+				<div className="absolute -left-20 top-20 h-56 w-56 rounded-full bg-sky-200/30 blur-3xl" />
+				<div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-blue-200/25 blur-3xl" />
+				<div className="relative grid grid-cols-12 items-center px-4 md:container md:mx-auto">
+					<div className="col-span-12 mx-auto mt-5 w-full text-center md:py-20">
+						<h1 className="font-poppins text-5xl font-bold leading-tight tracking-tighter text-gray-700 lg:text-7xl">
 							Find your
 						</h1>
 
-						<h1 className="font-bold text-5xl text-sky-600 font-KaushanScript leading-tight tracking-wide lg:text-7xl">
+						<h1 className="font-KaushanScript text-5xl font-bold leading-tight tracking-wide text-sky-600 lg:text-7xl">
 							dream companies
 						</h1>
-						<p className=" text-center text-gray-600 mt-3 font-poppins w-full  sm:w-3/4 mx-auto lg:text-xl">
-							Lorem ipsum dolor, sit amet consectetur adipisicing
-							elit. Sunt, veniam.
+						<p className="mx-auto mt-3 w-full font-poppins text-gray-600 sm:w-3/4 lg:text-xl">
+							Explore trusted companies, learn about their culture, and see
+							active opportunities before you apply.
 						</p>
-						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/4 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
-							<div className="flex justify-center items-center gap-1 w-full">
+						<div className="mx-auto mt-4 flex h-auto w-full flex-col gap-3 rounded-2xl border border-white/70 bg-white/90 px-6 py-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] backdrop-blur sm:w-3/4 md:w-3/4 lg:w-3/4 lg:flex-row lg:justify-between lg:gap-10 lg:px-5 lg:py-4">
+							<div className="flex w-full items-center justify-center gap-1">
 								<BsSearch />
 								<input
 									type="text"
-									className="w-full px-3 py-2 border-solid border-0 border-b border-slate-300 focus:outline-none "
+									className="w-full border-0 border-b border-slate-300 bg-transparent px-3 py-2 focus:outline-none"
 									placeholder="Company name or keyword"
 								/>
 							</div>
-							<div className="flex items-center justify-center gap-1 w-full">
+							<div className="flex w-full items-center justify-center gap-1">
 								<GoLocation />
 								<select
-									id="countries"
-									className="w-full px-2 py-2 border-solid bg-white"
+									id="industries"
+									defaultValue="Technology"
+									className="w-full bg-white px-2 py-2"
 								>
-									<option selected defaultValue={"US"}>
-										Technology
-									</option>
-									<option value="US">Business</option>
-									<option value="CA">Management</option>
-									<option value="FR">Accountant</option>
-									<option value="DE">Human Resources</option>
+									<option>Technology</option>
+									<option>Business</option>
+									<option>Management</option>
+									<option>Finance</option>
+									<option>Human Resources</option>
 								</select>
 							</div>
 							<button
-								className="py-3 px-6 font-bold bg-blue-700  text-white border border-transparent hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 transition duration-300 lg:w-[25rem]"
+								className="rounded-xl border border-transparent bg-blue-700 px-6 py-3 font-bold text-white transition duration-300 hover:border-blue-700 hover:bg-white hover:text-blue-700 lg:w-[25rem]"
 								onClick={handleClickFilter}
 							>
 								Search companies
 							</button>
 						</div>
-						<div className="text-center text-sky-900 mt-3 font-poppins w-full sm:text-center md:text-center lg:text-lg lg:text-center ">
-							<p>Popular : Apple, Microsoft, Google</p>
+						<div className="mt-3 w-full text-center font-poppins text-sky-900 lg:text-lg">
+							<p>Popular : Traveloka, Airbnb, Grab</p>
+						</div>
+						<div className="mt-6 grid grid-cols-1 gap-4 sm:mx-auto sm:w-3/4 md:grid-cols-3">
+							<div className="rounded-2xl border border-white/70 bg-white/85 px-5 py-4 shadow-[0_14px_36px_rgba(15,23,42,0.08)] backdrop-blur">
+								<p className="text-sm text-gray-500">Companies listed</p>
+								<h3 className="mt-1 text-2xl font-bold text-gray-800">
+									{featuredCompanies}
+								</h3>
+							</div>
+							<div className="rounded-2xl border border-white/70 bg-white/85 px-5 py-4 shadow-[0_14px_36px_rgba(15,23,42,0.08)] backdrop-blur">
+								<p className="text-sm text-gray-500">Open roles</p>
+								<h3 className="mt-1 text-2xl font-bold text-gray-800">
+									{openRoles}
+								</h3>
+							</div>
+							<div className="rounded-2xl border border-white/70 bg-white/85 px-5 py-4 shadow-[0_14px_36px_rgba(15,23,42,0.08)] backdrop-blur">
+								<p className="text-sm text-gray-500">Remote friendly</p>
+								<h3 className="mt-1 text-2xl font-bold text-gray-800">
+									{remoteFriendly} companies
+								</h3>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			{/* MORE FILTER */}
-			<button className="w-full py-5 gap-3 flex items-center justify-center border lg:hidden">
+
+			<button className="flex w-full items-center justify-center gap-3 border py-5 lg:hidden">
 				<BsFilter className="text-xl" />
 				<span className="text-md">More Filter</span>
 			</button>
-			{/* ALL JOBS */}
-			<div className="px-4 pt-10 container mx-auto lg:px-0">
+
+			<div className="container mx-auto px-4 pt-10 lg:px-0">
 				<div className="grid grid-cols-10 gap-10">
-					{/* KIRI */}
-					<div className="hidden lg:block lg:col-span-2">
-						{/* TYPE OF EMPLOYEE */}
-						<div className="overflow-hidden">
+					<div className="hidden lg:col-span-2 lg:block">
+						<div className="overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
 							<div
-								className="flex justify-between items-center text-xl"
+								className="flex items-center justify-between text-xl"
 								onClick={() => setShowType(!showType)}
 							>
-								<h1 className="font-bold cursor-pointer">
-									Type of employment
-								</h1>
+								<h1 className="cursor-pointer font-bold">Industry</h1>
 
 								<AiOutlineUp
 									className={`cursor-pointer ${
@@ -183,215 +134,50 @@ const Jobs = () => {
 									}`}
 								/>
 							</div>
-							<div className="mt-3  overflow-hidden">
+							<div className="mt-3 overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
+									className={`mt-3 h-auto text-white transition-all duration-150 ease-in ${
 										showType
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
+											? "block translate-y-0"
+											: "absolute -top-[200rem] -translate-y-full"
 									}`}
 								>
-									<div className="flex items-center mb-4">
-										<input
-											id="advertising-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100   rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="advertising-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Advertising (2)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="business-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="business-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Business Service (3)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="blockchain-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="blockchain-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Blockchain (25)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="cloud-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="cloud-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Cloud (10)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="consumer-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="consumer-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Consumer Tech (3)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="education-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="education-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Education (13)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="fintech-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="fintech-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Fintech (10)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="gaming-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="gaming-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Gaming (24)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="healthcare-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="healthcare-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Healthcare (32)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="media-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="media-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Media (12)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="hosting-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="hosting-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											Hosting (5)
-										</label>
-									</div>
+									{[
+										"Advertising (2)",
+										"Business Service (3)",
+										"Blockchain (8)",
+										"Cloud (5)",
+										"Consumer Tech (6)",
+										"Education (4)",
+										"Fintech (7)",
+										"Gaming (3)",
+									].map((item) => (
+										<div key={item} className="mb-4 flex items-center">
+											<input
+												id={item}
+												type="checkbox"
+												value=""
+												className="h-4 w-4 rounded-lg bg-gray-100 text-blue-600"
+												onClick={handleClickFilter}
+											/>
+											<label
+												htmlFor={item}
+												className="ml-2 text-lg font-medium text-gray-500"
+											>
+												{item}
+											</label>
+										</div>
+									))}
 								</div>
 							</div>
 						</div>
-						{/* CATEGORIES */}
-						<div className="mt-3">
+
+						<div className="mt-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
 							<div
-								className="flex justify-between items-center text-xl"
-								onClick={() =>
-									setShowCompanySize(!showCompanySize)
-								}
+								className="flex items-center justify-between text-xl"
+								onClick={() => setShowCompanySize(!showCompanySize)}
 							>
-								<h1 className="font-bold cursor-pointer">
-									Company Size
-								</h1>
+								<h1 className="cursor-pointer font-bold">Company Size</h1>
 								<AiOutlineUp
 									className={`cursor-pointer ${
 										showCompanySize
@@ -400,170 +186,144 @@ const Jobs = () => {
 									}`}
 								/>
 							</div>
-							<div className="mt-3  overflow-hidden">
+							<div className="mt-3 overflow-hidden">
 								<div
-									className={`mt-3 h-auto  text-white transition-all transform ease-in duration-150 ${
+									className={`mt-3 h-auto text-white transition-all duration-150 ease-in ${
 										showCompanySize
-											? " block translate-y-0 "
-											: "absolute -top-[200rem] -translate-y-full "
+											? "block translate-y-0"
+											: "absolute -top-[200rem] -translate-y-full"
 									}`}
 								>
-									<div className="flex items-center mb-4">
-										<input
-											id="satu-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-700 bg-gray-100 border-gray-300  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="satu-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											1-50 (24)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="dua-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="dua-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											51-150 (3)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="tiga-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="tiga-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											250-500 (21)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="empat-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="empat-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											501-1000 (3)
-										</label>
-									</div>
-									<div className="flex items-center mb-4">
-										<input
-											id="lima-checkbox"
-											type="checkbox"
-											value=""
-											className="w-4 h-4 text-blue-600 bg-gray-100  rounded-lg"
-											onClick={() => {
-												handleClickFilter();
-											}}
-										/>
-										<label
-											htmlFor="lima-checkbox"
-											className="ml-2 text-lg font-medium text-gray-500"
-										>
-											1000+ (12)
-										</label>
-									</div>
+									{["1-50 (2)", "51-150 (3)", "250-500 (2)", "501-1000 (1)", "1000+ (4)"].map(
+										(item) => (
+											<div key={item} className="mb-4 flex items-center">
+												<input
+													id={item}
+													type="checkbox"
+													value=""
+													className="h-4 w-4 rounded-lg bg-gray-100 text-blue-600"
+													onClick={handleClickFilter}
+												/>
+												<label
+													htmlFor={item}
+													className="ml-2 text-lg font-medium text-gray-500"
+												>
+													{item}
+												</label>
+											</div>
+										)
+									)}
 								</div>
 							</div>
 						</div>
 					</div>
-					{/* KANAN */}
+
 					{!loading ? (
-						<div className="col-span-10 flex flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">
+						<div className="col-span-10 mt-5 flex flex-col gap-4 pb-20 lg:col-span-8">
 							<div>
-								<h1 className="text-3xl font-semibold font-poppins">
+								<h1 className="font-poppins text-3xl font-semibold">
 									All Companies
 								</h1>
-								<div className="flex justify-between items-center mt-2">
+								<div className="mt-2 flex items-center justify-between">
 									<span className="text-gray-500">
-										Showing 153 result
+										Showing {allCompanies.length} company profiles
 									</span>
-									<span className="flex gap-3 items-center justify-center font-bold">
+									<span className="flex items-center justify-center gap-3 font-bold">
 										Most relevant <AiOutlineDown />
 									</span>
 								</div>
 							</div>
-							<div className="grid grid-cols-12 gap-5 ">
-								{allJobs.map((item) => (
+							<div className="grid grid-cols-12 gap-5">
+								{allCompanies.map((item) => (
 									<div
 										key={item.id}
-										className="col-span-12 border p-4 hover:shadow-lg transition-all duration-300 md:col-span-6 lg:col-span-6 cursor-pointer"
+										className="col-span-12 cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.1)] md:col-span-6 lg:col-span-6"
 										onClick={() => {
-											Router.push(
-												`/companies/${item.id}`
-											);
+											router.push(`/companies/${item.id}`);
 										}}
 									>
-										<div className="flex justify-between items-start">
-											<div className="w-20 h-20">
+										<div className="relative h-28 w-full overflow-hidden border-b border-slate-200 bg-slate-100">
+											<Image
+												src={item.cover}
+												alt={item.company}
+												fill
+												unoptimized
+												className="object-cover"
+											/>
+											<div className="absolute inset-0 bg-gradient-to-r from-slate-900/35 via-slate-900/10 to-transparent" />
+											<div className="absolute left-5 top-5">
+												<span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
+													{item.workplace}
+												</span>
+											</div>
+										</div>
+										<div className="p-5">
+										<div className="flex items-start justify-between gap-3">
+											<div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
 												<Image
-													src={TravelokaIcon}
-													alt=""
-													width="0"
-													height="0"
-													className="w-full h-full"
+													src={item.logo}
+													alt={item.company}
+													width={56}
+													height={56}
+													className="object-cover"
 												/>
 											</div>
-											<span className="py-2 px-5 text-blue-700 bg-blue-100 rounded-full font-bold">
+											<span className="rounded-full bg-blue-100 px-4 py-2 font-bold text-blue-700">
 												{item.job} Jobs
 											</span>
 										</div>
-										<div>
-											<h1 className="font-bold text-3xl tracking-wide">
+										<div className="mt-4">
+											<div className="mb-3 flex flex-wrap gap-2">
+												<span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
+													{item.industry}
+												</span>
+												<span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
+													{item.secondaryIndustry}
+												</span>
+											</div>
+											<h1 className="text-3xl font-bold tracking-wide text-slate-800">
 												{item.company}
 											</h1>
-											<p className="text-gray-500 my-3">
-												{item.desc}
+											<p className="mt-1 text-sm font-medium text-slate-600">
+												{item.tagline}
 											</p>
+											<p className="my-3 leading-7 text-gray-500">{item.desc}</p>
 										</div>
-										<div className="mt-3 flex gap-3">
-											<span className="py-2 px-5 text-green-700 bg-white border-2 border-green-200 rounded-full font-bold">
-												Business
+										<div className="mt-4 grid gap-3 sm:grid-cols-2">
+											<div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+												<p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+													Location
+												</p>
+												<p className="mt-1 text-sm font-semibold text-slate-700">
+													{item.location}
+												</p>
+											</div>
+											<div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+												<p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+													Company Size
+												</p>
+												<p className="mt-1 text-sm font-semibold text-slate-700">
+													{item.size}
+												</p>
+											</div>
+										</div>
+										<div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-gray-500">
+											<span>{item.website.replace("https://", "")}</span>
+											<span className="font-semibold text-blue-700">
+												View company
 											</span>
-											<span className="py-2 px-5 text-yellow-700 bg-white border-2 border-yellow-200 rounded-full font-bold">
-												Blockchain
-											</span>
+										</div>
 										</div>
 									</div>
 								))}
 							</div>
 						</div>
 					) : (
-						<div className="col-span-10 min-h-screen flex items-center flex-col gap-4 mt-5 pb-20 lg:col-span-8 ">
+						<div className="col-span-10 mt-5 flex min-h-screen flex-col items-center gap-4 pb-20 lg:col-span-8">
 							<div role="" className="mt-10">
 								<svg
 									aria-hidden="true"
-									className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-100 fill-blue-600"
+									className="mr-2 inline h-10 w-10 animate-spin fill-blue-600 text-gray-200 dark:text-gray-100"
 									viewBox="0 0 100 101"
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
@@ -587,4 +347,4 @@ const Jobs = () => {
 	);
 };
 
-export default Jobs;
+export default Companies;
