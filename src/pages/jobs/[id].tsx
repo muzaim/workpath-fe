@@ -75,18 +75,7 @@ const JobDetail = () => {
 									</div>
 								</div>
 							</div>
-							<div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 text-sm text-slate-600 sm:min-w-[220px]">
-								<p className="font-semibold text-slate-800">Application progress</p>
-								<p className="mt-1">
-									{jobDetail.applied} applicants for {jobDetail.capacity} slots
-								</p>
-								<div className="mt-3">
-									<LoadingBar
-										progress={jobDetail.applied}
-										total={jobDetail.capacity}
-									/>
-								</div>
-							</div>
+
 						</div>
 
 						<hr className="my-5" />
