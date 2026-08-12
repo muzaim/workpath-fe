@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { BsFilter, BsSearch } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
+import { FiArrowRight } from "react-icons/fi";
 
 import { allCompanies } from "@/data/companies";
+import { allJobs } from "@/data/jobs";
 
 const Companies = () => {
 	const [showType, setShowType] = useState(true);
@@ -18,7 +20,7 @@ const Companies = () => {
 	const remoteFriendly = allCompanies.filter(
 		(company) => company.workplace !== "Onsite"
 	).length;
-	const openRoles = allCompanies.reduce((total, company) => total + company.job, 0);
+	const openRoles = allJobs.length;
 
 	const handleClickFilter = () => {
 		setLoading(true);
@@ -234,88 +236,99 @@ const Companies = () => {
 								</div>
 							</div>
 							<div className="grid grid-cols-12 gap-5">
-								{allCompanies.map((item) => (
-									<div
-										key={item.id}
-										className="col-span-12 cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.1)] md:col-span-6 lg:col-span-6"
-										onClick={() => {
-											router.push(`/companies/${item.id}`);
-										}}
-									>
-										<div className="relative h-28 w-full overflow-hidden border-b border-slate-200 bg-slate-100">
-											<Image
-												src={item.cover}
-												alt={item.company}
-												fill
-												unoptimized
-												className="object-cover"
-											/>
-											<div className="absolute inset-0 bg-gradient-to-r from-slate-900/35 via-slate-900/10 to-transparent" />
-											<div className="absolute left-5 top-5">
-												<span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
-													{item.workplace}
-												</span>
-											</div>
-										</div>
-										<div className="p-5">
-										<div className="flex items-start justify-between gap-3">
-											<div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm">
+								{allCompanies.map((item) => {
+									const companyJobsCount = allJobs.filter(
+										(job) => job.company.toLowerCase() === item.company.toLowerCase()
+									).length;
+
+									return (
+										<div
+											key={item.id}
+											className="group col-span-12 cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:col-span-6 lg:col-span-6"
+											onClick={() => {
+												router.push(`/companies/${item.id}`);
+											}}
+										>
+											<div className="relative h-28 w-full overflow-hidden border-b border-slate-200 bg-slate-100">
 												<Image
-													src={item.logo}
+													src={item.cover}
 													alt={item.company}
-													width={56}
-													height={56}
+													fill
+													unoptimized
 													className="object-cover"
 												/>
+												<div className="absolute inset-0 bg-gradient-to-r from-slate-900/35 via-slate-900/10 to-transparent" />
+												<div className="absolute left-5 top-5">
+													<span className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 backdrop-blur">
+														{item.workplace}
+													</span>
+												</div>
 											</div>
-											<span className="rounded-full bg-blue-100 px-4 py-2 font-bold text-blue-700">
-												{item.job} Jobs
-											</span>
-										</div>
-										<div className="mt-4">
-											<div className="mb-3 flex flex-wrap gap-2">
-												<span className="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
-													{item.industry}
-												</span>
-												<span className="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
-													{item.secondaryIndustry}
-												</span>
+											<div className="p-5">
+												<div className="flex items-start justify-between gap-3">
+													<div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden p-1.5">
+														<img
+															src={item.logo}
+															alt={item.company}
+															className="h-12 w-12 object-contain rounded-xl"
+															onError={(e) => {
+																e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.company)}&background=f1f5f9&color=1d4ed8&bold=true`;
+															}}
+														/>
+													</div>
+													<span className="rounded bg-blue-50 text-blue-700 border border-blue-100/50 px-3 py-1 text-xs font-bold">
+														{companyJobsCount} Open Roles
+													</span>
+												</div>
+												<div className="mt-4">
+													<div className="mb-3 flex flex-wrap gap-1.5">
+														<span className="rounded bg-sky-50 text-sky-700 border border-sky-100/40 px-2.5 py-0.5 text-[11px] font-semibold">
+															{item.industry}
+														</span>
+														{item.secondaryIndustry && (
+															<span className="rounded bg-amber-50 text-amber-700 border border-amber-100/40 px-2.5 py-0.5 text-[11px] font-semibold">
+																{item.secondaryIndustry}
+															</span>
+														)}
+													</div>
+													<h3 className="text-xl font-bold text-slate-800 tracking-tight group-hover:text-blue-700 transition-colors">
+														{item.company}
+													</h3>
+													<p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1">
+														{item.tagline}
+													</p>
+													<p className="my-3 text-xs leading-relaxed text-slate-500 line-clamp-2">
+														{item.desc}
+													</p>
+												</div>
+												<div className="mt-4 grid gap-3 grid-cols-2">
+													<div className="rounded-xl border border-slate-100 bg-slate-50/50 px-3.5 py-2.5">
+														<p className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+															Location
+														</p>
+														<p className="mt-0.5 text-xs font-bold text-slate-700 truncate">
+															{item.location}
+														</p>
+													</div>
+													<div className="rounded-xl border border-slate-100 bg-slate-50/50 px-3.5 py-2.5">
+														<p className="text-[9px] font-bold uppercase tracking-widest text-slate-400">
+															Company Size
+														</p>
+														<p className="mt-0.5 text-xs font-bold text-slate-700 truncate">
+															{item.size}
+														</p>
+													</div>
+												</div>
+												<div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4 text-xs font-medium text-slate-400">
+													<span>{item.website.replace("https://", "").replace("www.", "")}</span>
+													<span className="font-bold text-blue-700 flex items-center gap-1 group-hover:text-blue-800">
+														View profile <FiArrowRight className="text-xs transition-transform duration-200 group-hover:translate-x-0.5" />
+													</span>
+												</div>
 											</div>
-											<h1 className="text-3xl font-bold tracking-wide text-slate-800">
-												{item.company}
-											</h1>
-											<p className="mt-1 text-sm font-medium text-slate-600">
-												{item.tagline}
-											</p>
-											<p className="my-3 leading-7 text-gray-500">{item.desc}</p>
 										</div>
-										<div className="mt-4 grid gap-3 sm:grid-cols-2">
-											<div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-												<p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-													Location
-												</p>
-												<p className="mt-1 text-sm font-semibold text-slate-700">
-													{item.location}
-												</p>
-											</div>
-											<div className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-												<p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
-													Company Size
-												</p>
-												<p className="mt-1 text-sm font-semibold text-slate-700">
-													{item.size}
-												</p>
-											</div>
-										</div>
-										<div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-4 text-sm text-gray-500">
-											<span>{item.website.replace("https://", "")}</span>
-											<span className="font-semibold text-blue-700">
-												View company
-											</span>
-										</div>
-										</div>
-									</div>
-								))}
+									);
+								})}
 							</div>
 						</div>
 					) : (

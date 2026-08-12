@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { BsFilter, BsSearch } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
+import { FiMapPin, FiBriefcase, FiClock } from "react-icons/fi";
 
 import LoadingBar from "@/components/elements/jobs/LoadingBar";
 import { allJobs } from "@/data/jobs";
@@ -445,84 +446,100 @@ const Jobs = () => {
 									<div
 										key={item.id}
 										onClick={() => router.push(`/jobs/${item.id}`)}
-										className="group col-span-12 cursor-pointer rounded-xl border bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl lg:col-span-6"
+										className="group col-span-12 cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg lg:col-span-6"
 									>
-										<div className="flex flex-col gap-5 md:flex-row md:items-start">
-											<div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg border">
-												<Image
-													src={item.logo}
-													alt={item.company}
-													width={56}
-													height={56}
-													className="object-cover"
-												/>
-											</div>
+										{/* Top Half: White details area */}
+										<div className="p-6">
+											<div className="flex flex-col gap-4 md:flex-row md:items-start md:gap-5">
+												{/* Logo with clean border square */}
+												<div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-sm transition-transform duration-300 group-hover:scale-105">
+													<img
+														src={item.logo}
+														alt={item.company}
+														className="h-11 w-11 object-contain rounded-lg"
+														onError={(e) => {
+															e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.company)}&background=f1f5f9&color=1d4ed8&bold=true`;
+														}}
+													/>
+												</div>
 
-											<div className="flex w-full flex-col gap-4 md:flex-row md:justify-between">
-												<div>
-													<div className="flex flex-wrap items-center gap-2">
-														{item.featured ? (
-															<span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-700">
-																Featured
+												{/* Main Info */}
+												<div className="flex-1">
+													<div className="flex items-center justify-between gap-3">
+														<div className="flex items-center gap-2">
+															<span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+																{item.company}
 															</span>
-														) : null}
-														<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-															{item.posting}
-														</span>
+															<span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+														</div>
+														<div className="flex items-center gap-1.5">
+															{item.featured && (
+																<span className="rounded bg-amber-50 text-amber-700 border border-amber-100/50 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider">
+																	Featured
+																</span>
+															)}
+															<span className="rounded bg-slate-100 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-500">
+																{item.posting}
+															</span>
+														</div>
 													</div>
-													<h3 className="text-lg font-semibold lg:text-xl">
+
+													<h3 className="text-base font-bold text-slate-800 group-hover:text-blue-700 transition-colors mt-2 line-clamp-1">
 														{item.title}
 													</h3>
 
-													<div className="mt-1 flex flex-wrap gap-3 text-sm text-gray-500">
-														<span>{item.company}</span>
-														<span>•</span>
-														<span>{item.location}</span>
-													</div>
-
-													<p className="mt-2 text-base font-semibold text-blue-700">
-														IDR {item.salary}
+													<p className="mt-2 text-xs leading-relaxed text-slate-500 line-clamp-2">
+														{item.about}
 													</p>
 
-													<div className="mt-4 flex flex-wrap items-center gap-3">
-														<span
-															className={`rounded-full px-3 py-1 text-xs font-semibold ${
-																item.type === "Freelance"
-																	? "bg-green-100 text-green-700"
-																	: "bg-yellow-100 text-yellow-700"
-															}`}
-														>
+													{/* Muted icons row */}
+													<div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-400 font-medium">
+														<span className="flex items-center gap-1">
+															<FiMapPin className="text-[13px] text-slate-400" />
+															{item.location}
+														</span>
+														<span className="flex items-center gap-1">
+															<FiClock className="text-[13px] text-slate-400" />
+															{item.workSetup}
+														</span>
+														<span className="flex items-center gap-1">
+															<FiBriefcase className="text-[13px] text-slate-400" />
 															{item.type}
-														</span>
-
-														<span className="rounded-full border border-yellow-400 px-3 py-1 text-xs font-semibold text-yellow-500">
-															{item.category}
-														</span>
-														<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-															{item.level}
 														</span>
 													</div>
 												</div>
+											</div>
+										</div>
 
-												<div className="flex w-full flex-col gap-3 md:max-w-[220px]">
-													<button
-														onClick={(e) => {
-															e.stopPropagation();
-															router.push(`/jobs/${item.id}`);
-														}}
-														className="rounded-lg bg-blue-700 py-3 text-sm font-semibold text-white transition hover:bg-blue-800"
-													>
-														Apply Now
-													</button>
+										{/* Bottom Half: Shaded details area */}
+										<div className="bg-slate-50/70 p-6 pt-4 pb-5 border-t border-slate-100/80 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+											<div>
+												<span className="text-[9px] text-slate-400 block font-bold uppercase tracking-widest">Est. Salary</span>
+												<div className="text-[14px] font-bold font-poppins text-blue-700 mt-0.5">
+													IDR {item.salary}
+												</div>
+												<span className="inline-block mt-1.5 bg-white border border-slate-200/60 rounded px-2 py-0.5 text-[9px] font-bold text-slate-500 uppercase tracking-wide">
+													{item.category}
+												</span>
+											</div>
 
+											{/* Action Box */}
+											<div className="flex flex-col gap-2.5 w-full sm:max-w-[180px] shrink-0">
+												<button
+													onClick={(e) => {
+														e.stopPropagation();
+														router.push(`/jobs/${item.id}`);
+													}}
+													className="w-full rounded-lg bg-slate-900 py-2.5 text-xs font-semibold text-white transition-colors duration-200 hover:bg-blue-700 shadow-sm"
+												>
+													Apply Now
+												</button>
+												<div>
 													<LoadingBar progress={item.applied} total={item.capacity} />
-
-													<p className="text-xs text-gray-500">
-														<span className="font-semibold text-gray-700">
-															{item.applied}
-														</span>{" "}
-														applied of {item.capacity} capacity
-													</p>
+													<div className="flex items-center justify-between text-[10px] text-slate-400 mt-1.5 font-medium">
+														<span>{item.applied} applied</span>
+														<span>{item.capacity} max</span>
+													</div>
 												</div>
 											</div>
 										</div>

@@ -102,13 +102,14 @@ const DetailCompany = () => {
 							</div>
 						</div>
 						<div className="col-span-12 flex items-center justify-center pb-4 lg:order-1 lg:col-span-4 lg:justify-start lg:pb-0">
-							<div className="rounded-[1.5rem] border border-slate-200 bg-white p-3 shadow-[0_12px_25px_rgba(15,23,42,0.08)]">
-								<Image
+							<div className="rounded-[1.5rem] border border-slate-200 bg-white p-3 shadow-[0_12px_25px_rgba(15,23,42,0.08)] flex items-center justify-center overflow-hidden">
+								<img
 									src={company.logo}
 									alt={company.company}
-									width={128}
-									height={128}
-									className="h-20 w-20 rounded-xl object-cover lg:h-32 lg:w-32"
+									className="h-20 w-20 lg:h-32 lg:w-32 rounded-xl object-contain"
+									onError={(e) => {
+										e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(company.company)}&background=f1f5f9&color=1d4ed8&bold=true`;
+									}}
 								/>
 							</div>
 						</div>

@@ -40,13 +40,14 @@ const JobDetail = () => {
 					<div className="rounded-xl bg-white p-5 shadow-xl">
 						<div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
 							<div className="flex items-center justify-start gap-4">
-								<div className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm">
-									<Image
+								<div className="flex h-16 w-16 items-center justify-center rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden p-1">
+									<img
 										src={jobDetail.logo}
 										alt={jobDetail.company}
-										width={56}
-										height={56}
-										className="h-14 w-14 object-contain"
+										className="h-12 w-12 object-contain rounded-lg"
+										onError={(e) => {
+											e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(jobDetail.company)}&background=f1f5f9&color=1d4ed8&bold=true`;
+										}}
 									/>
 								</div>
 								<div>
