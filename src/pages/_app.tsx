@@ -2,6 +2,7 @@ import MasterLayout from "@/components/layout/Master";
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
+import { CandidateProvider } from "@/lib/CandidateContext";
 
 export default function App({
 	Component,
@@ -9,9 +10,11 @@ export default function App({
 }: AppProps) {
 	return (
 		<SessionProvider session={session}>
-			<MasterLayout>
-				<Component {...pageProps} />
-			</MasterLayout>
+			<CandidateProvider>
+				<MasterLayout>
+					<Component {...pageProps} />
+				</MasterLayout>
+			</CandidateProvider>
 		</SessionProvider>
 	);
 }

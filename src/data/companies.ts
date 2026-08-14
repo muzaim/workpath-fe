@@ -6,6 +6,14 @@ type CompanyOpening = {
 	salary: string;
 };
 
+export type CompanyReview = {
+	author: string;
+	role: string;
+	text: string;
+	rating: number;
+	date: string;
+};
+
 export type CompanyItem = {
 	id: number;
 	logo: string;
@@ -24,15 +32,19 @@ export type CompanyItem = {
 	benefits: string[];
 	openings: CompanyOpening[];
 	gallery: string[];
+	rating?: number;
+	reviews?: CompanyReview[];
+	foundedYear?: number;
+	verified?: boolean;
 };
 
 export const allCompanies: CompanyItem[] = [
 	{
 		id: 1,
-		logo: "https://zonalogo.com/assets/logo-gojek.webp",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/8/82/GoTo_Logo.svg",
 		company: "GoTo",
 		tagline: "Powering commerce, mobility, and financial access.",
-		desc: "GoTo is the largest technology group in` Indonesia, bringing together Gojek, Tokopedia, and GoTo Financial into a single, unified ecosystem that empowers millions of users, drivers, and merchants daily.",
+		desc: "GoTo is the largest technology group in Indonesia, bringing together Gojek, Tokopedia, and GoTo Financial into a single, unified ecosystem that empowers millions of users, drivers, and merchants daily.",
 		job: 3,
 		industry: "Ecosystem Platform",
 		secondaryIndustry: "Fintech",
@@ -40,7 +52,7 @@ export const allCompanies: CompanyItem[] = [
 		website: "https://www.gotocompany.com",
 		size: "1,000+ employees",
 		workplace: "Hybrid",
-		cover: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+		cover: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1400&q=80",
 		overview: [
 			"GoTo operates with a fast-moving, collaborative culture where teams are encouraged to solve meaningful problems and ship work that directly impacts customers across Southeast Asia.",
 			"People here usually thrive when they enjoy clear ownership, open communication, and working closely with cross-functional teams across product, design, operations, and engineering."
@@ -60,11 +72,18 @@ export const allCompanies: CompanyItem[] = [
 			"https://cdn.techinasia.com/data/images/PD1Iot306apnFQNwBdyirIZ54xpPJZWxcmC9j2yO.jpeg",
 			"https://cdn.techinasia.com/data/images/6wH9LEG8cufL8s7ddFXfiCVtotqNLEN2UdEWJJvg.jpeg",
 			"https://cdn.techinasia.com/data/images/PO9CyFaWXstkLXy0rTZLE4rwrMa8VFihdCOYZ9t6.jpeg"
+		],
+		rating: 4.6,
+		foundedYear: 2021,
+		verified: true,
+		reviews: [
+			{ author: "Rian S.", role: "Senior Frontend Engineer", text: "Lingkungan kerja sangat kolaboratif dengan scale produk yang masif.", rating: 5, date: "12 Des 2025" },
+			{ author: "Amalia P.", role: "Product Manager", text: "Kecepatan kerja tinggi, kesempatan belajar luar biasa banyak.", rating: 4, date: "05 Jan 2026" }
 		]
 	},
 	{
 		id: 2,
-		logo: "https://cdn.brandfetch.io/domain/traveloka.com/fallback/lettermark/theme/dark/h/400/w/400/icon?c=1bfwsmEH20zzEfSNTed",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Traveloka_Logo.svg",
 		company: "Traveloka",
 		tagline: "Travel and lifestyle platform for Southeast Asia.",
 		desc: "Traveloka is Southeast Asia's leading travel and lifestyle platform, providing a seamless experience for users to discover and purchase a wide range of travel, local activities, and financial services products.",
@@ -75,7 +94,7 @@ export const allCompanies: CompanyItem[] = [
 		website: "https://www.traveloka.com",
 		size: "1,000+ employees",
 		workplace: "Hybrid",
-		cover: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1400&q=80",
+		cover: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80",
 		overview: [
 			"Traveloka is a technology company based in Jakarta, Indonesia. Founded in 2012 by ex-Silicon Valley engineers, we are now one of the most prominent tech startups in the region.",
 			"We believe in a culture of high performance and empathy, where engineers and product teams collaborate to simplify complex travel needs for global tourists."
@@ -95,6 +114,12 @@ export const allCompanies: CompanyItem[] = [
 			"https://cdn.techinasia.com/data/images/AFwBey3En6Ugtv3LlH3S5Noul1AYhkblrWQs4AJY.jpeg",
 			"https://cdn.techinasia.com/data/images/Z9YIRpKYBRfkPpiMsUfsHvBilPiFCjRWYj0Gj9Bc.jpeg",
 			"https://cdn.techinasia.com/data/images/qBytXB7wGVLDrvUpSeukYcKnT1pP3AooV6i1bmUb.jpeg"
+		],
+		rating: 4.8,
+		foundedYear: 2012,
+		verified: true,
+		reviews: [
+			{ author: "Budi T.", role: "UI/UX Researcher", text: "Proses riset sangat dihargai dan didukung penuh oleh stakeholders.", rating: 5, date: "24 Nov 2025" }
 		]
 	},
 	{

@@ -23,12 +23,16 @@ export type JobItem = {
 	companyOverview: string;
 	industry: string;
 	companySize: string;
+	easyApply?: boolean;
+	urgent?: boolean;
+	verified?: boolean;
+	hiringProcess?: string[];
 };
 
 export const allJobs: JobItem[] = [
 	{
 		id: 1,
-		logo: "https://zonalogo.com/assets/logo-gojek.webp",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/8/82/GoTo_Logo.svg",
 		title: "Frontend Developer",
 		company: "GoTo",
 		location: "Jakarta",
@@ -64,10 +68,14 @@ export const allJobs: JobItem[] = [
 			"GoTo is the largest technology group in Indonesia, powering commerce, mobility, and financial access for millions.",
 		industry: "Technology",
 		companySize: "1,000+ employees",
+		easyApply: true,
+		urgent: true,
+		verified: true,
+		hiringProcess: ["CV Screening", "Technical Assessment", "Technical Interview", "HR Fit Interview", "Offering Letter"],
 	},
 	{
 		id: 2,
-		logo: "https://cdn.brandfetch.io/domain/traveloka.com/fallback/lettermark/theme/dark/h/400/w/400/icon?c=1bfwsmEH20zzEfSNTed",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Traveloka_Logo.svg",
 		title: "UI/UX Designer",
 		company: "Traveloka",
 		location: "Jakarta",
@@ -98,17 +106,15 @@ export const allJobs: JobItem[] = [
 			"Ability to articulate design decisions clearly to cross-functional stakeholders.",
 			"Willingness to work from our BSD City Office on hybrid schedule.",
 		],
-		skills: [
-			"Figma",
-			"Design System",
-			"Prototyping",
-			"User Research",
-			"Wireframing",
-		],
+		skills: ["Figma", "UI Design", "UX Research", "Wireframing", "Prototyping"],
 		companyOverview:
-			"Traveloka is Southeast Asia's leading travel and lifestyle platform, serving millions of users with flights, hotels, and activities.",
+			"Traveloka is Southeast Asia's leading travel and lifestyle platform, providing a seamless experience for users to discover and purchase products.",
 		industry: "Travel Technology",
 		companySize: "1,000+ employees",
+		easyApply: false,
+		urgent: false,
+		verified: true,
+		hiringProcess: ["Portfolio Review", "Design Challenge", "Design Presentation", "HR Interview", "Offering"],
 	},
 	{
 		id: 3,
@@ -412,7 +418,7 @@ export const allJobs: JobItem[] = [
 	},
 	{
 		id: 10,
-		logo: "https://zonalogo.com/assets/logo-gojek.webp",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/8/82/GoTo_Logo.svg",
 		title: "QA Engineer",
 		company: "GoTo",
 		location: "Bandung",
@@ -550,7 +556,7 @@ export const allJobs: JobItem[] = [
 	},
 	{
 		id: 13,
-		logo: "https://zonalogo.com/assets/logo-gojek.webp",
+		logo: "https://upload.wikimedia.org/wikipedia/commons/8/82/GoTo_Logo.svg",
 		title: "Mobile Engineer (Android/iOS)",
 		company: "GoTo",
 		location: "Jakarta",

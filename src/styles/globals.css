@@ -18,4 +18,22 @@
 	::selection {
 		@apply bg-blue-100 text-blue-900;
 	}
+
+	/* Custom Premium Scrollbars */
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+	::-webkit-scrollbar-track {
+		@apply bg-slate-100;
+	}
+	::-webkit-scrollbar-thumb {
+		@apply bg-slate-300 rounded-full border-2 border-slate-100 hover:bg-slate-400 transition-colors;
+	}
+}
+
+@layer utilities {
+	.text-balance {
+		text-wrap: balance;
+	}
 }

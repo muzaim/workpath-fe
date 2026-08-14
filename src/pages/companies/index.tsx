@@ -121,29 +121,20 @@ const Companies = () => {
 			<div className="container mx-auto px-4 pt-10 lg:px-0">
 				<div className="grid grid-cols-10 gap-10">
 					<div className="hidden lg:col-span-2 lg:block">
-						<div className="overflow-hidden rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+						<div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm mb-4">
 							<div
-								className="flex items-center justify-between text-xl"
+								className="flex items-center justify-between cursor-pointer select-none text-slate-800"
 								onClick={() => setShowType(!showType)}
 							>
-								<h1 className="cursor-pointer font-bold">Industry</h1>
-
+								<h3 className="font-bold text-xs uppercase tracking-wider">Industry</h3>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										showType
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
+									className={`text-slate-400 text-xs transition-transform duration-200 ${
+										showType ? "rotate-180" : ""
 									}`}
 								/>
 							</div>
-							<div className="mt-3 overflow-hidden">
-								<div
-									className={`mt-3 h-auto text-white transition-all duration-150 ease-in ${
-										showType
-											? "block translate-y-0"
-											: "absolute -top-[200rem] -translate-y-full"
-									}`}
-								>
+							{showType && (
+								<div className="mt-4 flex flex-col">
 									{[
 										"Advertising (2)",
 										"Business Service (3)",
@@ -154,84 +145,72 @@ const Companies = () => {
 										"Fintech (7)",
 										"Gaming (3)",
 									].map((item) => (
-										<div key={item} className="mb-4 flex items-center">
+										<div key={item} className="mb-3 flex items-center gap-2.5 cursor-pointer last:mb-0">
 											<input
 												id={item}
 												type="checkbox"
-												value=""
-												className="h-4 w-4 rounded-lg bg-gray-100 text-blue-600"
+												className="h-4 w-4 rounded border-slate-300 bg-slate-50 text-blue-600 focus:ring-blue-500 cursor-pointer"
 												onClick={handleClickFilter}
 											/>
 											<label
 												htmlFor={item}
-												className="ml-2 text-lg font-medium text-gray-500"
+												className="text-sm font-medium text-slate-600 select-none cursor-pointer"
 											>
 												{item}
 											</label>
 										</div>
 									))}
 								</div>
-							</div>
+							)}
 						</div>
 
-						<div className="mt-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+						<div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm mb-4">
 							<div
-								className="flex items-center justify-between text-xl"
+								className="flex items-center justify-between cursor-pointer select-none text-slate-800"
 								onClick={() => setShowCompanySize(!showCompanySize)}
 							>
-								<h1 className="cursor-pointer font-bold">Company Size</h1>
+								<h3 className="font-bold text-xs uppercase tracking-wider">Company Size</h3>
 								<AiOutlineUp
-									className={`cursor-pointer ${
-										showCompanySize
-											? "rotate-180 transition-all duration-150 ease-in"
-											: "transition-all duration-150 ease-in"
+									className={`text-slate-400 text-xs transition-transform duration-200 ${
+										showCompanySize ? "rotate-180" : ""
 									}`}
 								/>
 							</div>
-							<div className="mt-3 overflow-hidden">
-								<div
-									className={`mt-3 h-auto text-white transition-all duration-150 ease-in ${
-										showCompanySize
-											? "block translate-y-0"
-											: "absolute -top-[200rem] -translate-y-full"
-									}`}
-								>
-									{["1-50 (2)", "51-150 (3)", "250-500 (2)", "501-1000 (1)", "1000+ (4)"].map(
-										(item) => (
-											<div key={item} className="mb-4 flex items-center">
-												<input
-													id={item}
-													type="checkbox"
-													value=""
-													className="h-4 w-4 rounded-lg bg-gray-100 text-blue-600"
-													onClick={handleClickFilter}
-												/>
-												<label
-													htmlFor={item}
-													className="ml-2 text-lg font-medium text-gray-500"
-												>
-													{item}
-												</label>
-											</div>
-										)
-									)}
+							{showCompanySize && (
+								<div className="mt-4 flex flex-col">
+									{["1-50 (2)", "51-150 (3)", "250-500 (2)", "501-1000 (1)", "1000+ (4)"].map((item) => (
+										<div key={item} className="mb-3 flex items-center gap-2.5 cursor-pointer last:mb-0">
+											<input
+												id={item}
+												type="checkbox"
+												className="h-4 w-4 rounded border-slate-300 bg-slate-50 text-blue-600 focus:ring-blue-500 cursor-pointer"
+												onClick={handleClickFilter}
+											/>
+											<label
+												htmlFor={item}
+												className="text-sm font-medium text-slate-600 select-none cursor-pointer"
+											>
+												{item}
+											</label>
+										</div>
+									))}
 								</div>
-							</div>
+							)}
 						</div>
 					</div>
 
 					{!loading ? (
 						<div className="col-span-10 mt-5 flex flex-col gap-4 pb-20 lg:col-span-8">
 							<div>
-								<h1 className="font-poppins text-3xl font-semibold">
+								<h2 className="font-poppins text-2xl font-bold tracking-tight text-slate-800">
 									All Companies
-								</h1>
-								<div className="mt-2 flex items-center justify-between">
-									<span className="text-gray-500">
+								</h2>
+								<div className="mt-1 flex items-center justify-between">
+									<span className="text-sm text-slate-500">
 										Showing {allCompanies.length} company profiles
 									</span>
-									<span className="flex items-center justify-center gap-3 font-bold">
-										Most relevant <AiOutlineDown />
+									<span className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-800 cursor-pointer transition-colors duration-150">
+										Most relevant <AiOutlineDown className="text-[10px]" />
 									</span>
 								</div>
 							</div>

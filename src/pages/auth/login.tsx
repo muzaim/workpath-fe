@@ -82,24 +82,24 @@ const LoginPage = () => {
 								</div>
 							</div>
 
-							<h2 className="mt-8 text-3xl font-bold text-slate-900">
+							<h2 className="mt-8 text-2xl font-bold tracking-tight text-slate-900">
 								Login to your account
 							</h2>
-							<p className="mt-2 text-sm text-slate-500">
+							<p className="mt-1.5 text-sm text-slate-500">
 								Continue your search and manage your opportunities.
 							</p>
 
 							{error ? (
-								<div className="mt-5 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+								<div className="mt-5 rounded-xl border border-red-100 bg-red-50/50 px-4 py-2.5 text-xs font-medium text-red-600">
 									{error}
 								</div>
 							) : null}
 
-							<form className="mt-8 space-y-5" onSubmit={handleSubmit}>
+							<form className="mt-6 space-y-4" onSubmit={handleSubmit}>
 								<div>
 									<label
 										htmlFor="email"
-										className="mb-2 block text-sm font-semibold text-slate-700"
+										className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-600"
 									>
 										Email
 									</label>
@@ -108,14 +108,14 @@ const LoginPage = () => {
 										name="email"
 										id="email"
 										placeholder="name@company.com"
-										className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+										className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-all duration-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
 										required
 									/>
 								</div>
 								<div>
 									<label
 										htmlFor="password"
-										className="mb-2 block text-sm font-semibold text-slate-700"
+										className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-600"
 									>
 										Password
 									</label>
@@ -124,14 +124,14 @@ const LoginPage = () => {
 										name="password"
 										id="password"
 										placeholder="••••••••"
-										className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500"
+										className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition-all duration-200 focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
 										required
 									/>
 								</div>
 
 								<button
 									type="submit"
-									className="w-full rounded-xl bg-blue-700 px-5 py-3 font-semibold text-white transition hover:bg-blue-800"
+									className="w-full rounded-xl bg-blue-600 px-5 py-2.5 font-semibold text-white transition-colors duration-250 hover:bg-blue-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600/50"
 									disabled={isLoading}
 								>
 									{isLoading ? "Signing in..." : "Login"}

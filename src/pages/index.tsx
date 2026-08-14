@@ -205,22 +205,22 @@ export default function Home() {
 							A platform that connects job seekers with the right opportunities, helping them find meaningful work and grow their careers.
 						</p>
 
-						<div className="w-full h-auto bg-white mt-3 py-5 px-6 flex flex-col gap-3 lg:gap-10  sm:w-3/4 md:w-3/4 mx-auto lg:flex-row lg:w-3/4 lg:justify-between lg:px-5 lg:py-3 shadow-lg">
-							<div className="flex justify-center items-center gap-1 w-full">
-								<BsSearch />
+						<div className="w-full h-auto bg-white/90 border border-slate-100 rounded-2xl mt-6 p-4 flex flex-col gap-4 sm:w-5/6 md:w-4/5 mx-auto lg:flex-row lg:items-center lg:justify-between shadow-[0_20px_50px_rgba(15,23,42,0.06)] backdrop-blur">
+							<div className="flex items-center gap-3 px-3 py-2 border border-slate-200/60 rounded-xl bg-white w-full">
+								<BsSearch className="text-slate-400 text-lg shrink-0" />
 								<input
 									type="text"
-									className="w-full px-3 py-2 border-solid border-0 border-b border-slate-300 focus:outline-none"
+									className="w-full text-sm text-slate-800 bg-transparent placeholder-slate-400 focus:outline-none"
 									placeholder="Job title or keyword"
 								/>
 							</div>
-							<div className="flex items-center justify-center gap-1 w-full">
-								<GoLocation />
+							<div className="flex items-center gap-3 px-3 py-2 border border-slate-200/60 rounded-xl bg-white w-full">
+								<GoLocation className="text-slate-400 text-lg shrink-0" />
 								<select
 									id="countries"
-									className="w-full px-2 py-2 border-solid bg-white"
+									className="w-full text-sm text-slate-800 bg-transparent focus:outline-none cursor-pointer"
 								>
-									<option selected>Sleman, Yogyakarta</option>
+									<option defaultValue="Sleman">Sleman, Yogyakarta</option>
 									<option value="US">United States</option>
 									<option value="CA">Canada</option>
 									<option value="FR">France</option>
@@ -228,7 +228,7 @@ export default function Home() {
 								</select>
 							</div>
 							<button
-								className="py-3 px-6 font-bold bg-blue-700  text-white border border-transparent hover:border hover:border-blue-700 hover:bg-white hover:text-blue-700 transition duration-300 lg:w-[30rem]"
+								className="py-3 px-6 text-sm font-semibold rounded-xl bg-blue-700 text-white hover:bg-blue-800 shadow-sm hover:shadow transition duration-200 lg:w-[20rem] shrink-0"
 								onClick={() => router.push("/jobs")}
 							>
 								Search my job
@@ -303,41 +303,29 @@ export default function Home() {
 					{dataCategory.map((item) => (
 						<div
 							key={item.id}
-							className="
-          group col-span-12 cursor-pointer rounded-xl border bg-white
-          px-5 py-6 transition-all duration-300
-          hover:-translate-y-1 hover:border-blue-700 hover:bg-blue-700
-          hover:shadow-lg
-          md:col-span-6 lg:col-span-3
-        "
+							className="group col-span-12 cursor-pointer rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue-700 hover:bg-blue-700 hover:shadow-xl md:col-span-6 lg:col-span-3"
+							onClick={() => router.push("/jobs")}
 						>
-							<div className="flex items-start justify-between">
+							<div className="flex items-start justify-between gap-2">
 								<div className="flex items-start gap-4">
 									{/* Icon */}
-									<div className="
-              flex h-10 w-10 items-center justify-center rounded-lg
-              bg-blue-50 text-blue-700
-              group-hover:bg-white group-hover:text-blue-700
-            ">
+									<div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-700 group-hover:bg-white/10 group-hover:text-white transition-colors duration-300 p-2.5">
 										{item.logo}
 									</div>
 
 									{/* Text */}
 									<div>
-										<h3 className="text-lg font-semibold group-hover:text-white">
+										<h3 className="text-base font-bold text-slate-800 group-hover:text-white transition-colors duration-300">
 											{item.name}
 										</h3>
-										<p className="mt-1 text-sm text-gray-500 group-hover:text-blue-100">
+										<p className="mt-1 text-xs text-slate-500 group-hover:text-blue-100 transition-colors duration-300">
 											{item.count} jobs available
 										</p>
 									</div>
 								</div>
 
 								{/* Arrow */}
-								<FiArrowRight className="
-            text-xl text-gray-400 transition-all
-            group-hover:translate-x-1 group-hover:text-white
-          " />
+								<FiArrowRight className="text-lg text-slate-400 group-hover:translate-x-1 group-hover:text-white transition-all duration-300 shrink-0 mt-0.5" />
 							</div>
 						</div>
 					))}
@@ -350,28 +338,33 @@ export default function Home() {
 			</div>
 
 			{/* START POSTING JOB */}
-			<div className="px-4  bg-blue-700 py-20 ">
-				<div className="container mx-auto md:grid md:grid-cols-12 md:gap-3 md:items-center bg">
-					<div className="pt-10 pb-3 text-center md:col-span-5 md:text-start">
-						<h1 className="text-white font-bold text-4xl md:text-6xl md:w-3/4 ">
-							Start posting jobs today
-						</h1>
-						<p className="mt-2 text-white text-lg md:text-xl md:my-4">
-							Start posting jobs for only $10.
-						</p>
-						<button className="w-full py-4 mt-2 bg-white border border-transparent text-blue-700 font-bold text-xl md:w-[20rem] hover:bg-blue-700 hover:text-white hover:border hover:border-white transition-all duration-300">
-							SignUp For Free
-						</button>
-					</div>
-					<div className="md:col-span-7">
-						<Image
-							src={Nadia}
-							alt="me"
-							width="0"
-							height="0"
-							sizes="100vw"
-							className="w-full h-full"
-						/>
+			<div className="px-4 md:container md:mx-auto py-12">
+				<div className="rounded-3xl bg-blue-700 p-8 md:p-12 lg:p-16 shadow-2xl relative overflow-hidden">
+					<div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.15),_transparent_45%)]" />
+					<div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+						<div className="text-center md:text-start md:col-span-5">
+							<h1 className="text-white font-bold text-4xl lg:text-5xl leading-tight">
+								Start posting jobs today
+							</h1>
+							<p className="mt-3 text-blue-100 text-base lg:text-lg">
+								Start posting jobs for only $10.
+							</p>
+							<button
+								className="w-full sm:w-auto py-3 px-8 mt-6 bg-white text-blue-700 font-bold rounded-xl border border-transparent hover:bg-blue-50 transition-colors duration-250 shadow-md"
+								onClick={() => router.push("/signup")}
+							>
+								SignUp For Free
+							</button>
+						</div>
+						<div className="md:col-span-7 flex justify-center">
+							<Image
+								src={Nadia}
+								alt="candidate profile"
+								width={450}
+								height={300}
+								className="object-contain"
+							/>
+						</div>
 					</div>
 				</div>
 			</div>

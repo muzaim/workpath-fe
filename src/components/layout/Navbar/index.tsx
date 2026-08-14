@@ -35,41 +35,26 @@ const Navbar = () => {
 								WorkPath
 							</span>
 						</div>
-						<ul className="hidden md:flex items-center gap-6 text-sm font-medium font-poppins">
+						<ul className="hidden md:flex items-center gap-2 text-sm font-medium font-poppins">
 							{[
 								{ label: "Find Jobs", href: "/jobs", key: "jobs" },
 								{ label: "Browse Companies", href: "/companies", key: "companies" },
+								{ label: "Dashboard", href: "/dashboard", key: "dashboard" },
 							].map(({ label, href, key }) => {
-								const isActive = route.includes(key);
+								const isActive = route === href || (href !== "/" && route.startsWith(href));
 
 								return (
-									<li
-										key={key}
-										className={`
-          relative flex h-20 items-center
-          transition-colors duration-300
-          ${isActive ? "text-blue-700" : "text-gray-600"}
-        `}
-									>
+									<li key={key} className="flex items-center">
 										<Link
 											href={href}
-											className={`rounded-full px-3 py-2 capitalize transition-all duration-300 ${
+											className={`rounded-lg px-4 py-2 capitalize transition-all duration-200 font-semibold ${
 												isActive
 													? "bg-blue-50 text-blue-700"
-													: "hover:bg-slate-100 hover:text-blue-700"
+													: "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
 											}`}
 										>
 											{label}
 										</Link>
-
-										{/* underline */}
-										<span
-											className={`
-            absolute bottom-0 left-0 h-[2px] w-full
-            bg-blue-700 transition-all duration-300
-            ${isActive ? "scale-x-100" : "scale-x-0"}
-          `}
-										/>
 									</li>
 								);
 							})}
@@ -124,29 +109,29 @@ const Navbar = () => {
 							></div>
 						)}
 						<div
-							className={`md:hidden fixed top-0  w-[80%] h-screen bg-blue-700 z-[99999] transition-all duration-300 ease-in-out ${showFullNav ? "-right-[100rem]" : "right-0"
+							className={`md:hidden fixed top-0 w-[80%] h-screen bg-slate-950 z-[99999] transition-all duration-300 ease-in-out shadow-2xl ${showFullNav ? "-right-[100rem]" : "right-0"
 								}`}
 						>
 							<div>
-								<div className="relative flex h-20 items-center justify-end bg-blue-700 px-4 md:container md:mx-auto md:bg-white md:px-0">
+								<div className="relative flex h-20 items-center justify-end bg-slate-950 px-4 md:container md:mx-auto md:px-0">
 									<div
-										className="flex h-10 w-10 items-center justify-center rounded-xl border border-transparent bg-white text-blue-700 transition duration-300 hover:border-blue-700 hover:bg-white hover:text-blue-700"
+										className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition duration-200 hover:bg-white/10 cursor-pointer"
 										onClick={() =>
 											setShowFullNav(!showFullNav)
 										}
 									>
 										<RxHamburgerMenu
-											className={`cursor-pointer rotate-90 ${showFullNav
+											className={`cursor-pointer rotate-90 text-lg ${showFullNav
 												? "rotate-90 transition-all duration-150 ease-in"
 												: "transition-all duration-150 ease-in"
 												}`}
 										/>
 									</div>
 								</div>
-								<div className="h-screen w-full bg-blue-700 px-8 py-6">
+								<div className="h-screen w-full bg-slate-950 px-8 py-6">
 									{/* Profile */}
-									<div className="flex items-center gap-4 border-b border-white/20 pb-6">
-										<div className="relative h-14 w-14 overflow-hidden rounded-full border-2 border-white">
+									<div className="flex items-center gap-4 border-b border-white/5 pb-6">
+										<div className="relative h-14 w-14 overflow-hidden rounded-full border border-white/10">
 											<Image
 												src="https://asset-a.grid.id/crop/0x0:1080x763/945x630/photo/2023/03/26/inspirasi-warna-rambut-ala-lisa-20230326025321.jpg"
 												alt="profile"
@@ -156,10 +141,10 @@ const Navbar = () => {
 											/>
 										</div>
 										<div>
-											<h1 className="text-lg font-bold text-white uppercase">
+											<h1 className="text-lg font-bold text-white uppercase tracking-wide">
 												Nadia
 											</h1>
-											<span className="text-sm text-white/70">
+											<span className="text-sm text-slate-400">
 												Job Seeker
 											</span>
 										</div>
@@ -175,12 +160,12 @@ const Navbar = () => {
 											<li
 												key={i}
 												onClick={() => {
-													router.push("/jobs");
+													router.push("/dashboard");
 													setShowFullNav(false);
 												}}
-											className="group flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-white transition hover:bg-white/10"
+												className="group flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-slate-300 transition hover:bg-white/5 hover:text-white"
 											>
-												<span className="text-xl">{item.icon}</span>
+												<span className="text-xl text-slate-400 group-hover:text-blue-500">{item.icon}</span>
 												<span className="text-base font-medium">
 													{item.label}
 												</span>
@@ -193,7 +178,7 @@ const Navbar = () => {
 												router.push("/jobs");
 												setShowFullNav(false);
 											}}
-											className="mt-2 flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-red-200 transition hover:bg-red-500/20"
+											className="mt-2 flex cursor-pointer items-center gap-4 rounded-lg px-4 py-3 text-red-400 transition hover:bg-red-500/10"
 										>
 											<BiLogOutCircle className="text-xl" />
 											<span className="text-base font-semibold">
@@ -203,7 +188,7 @@ const Navbar = () => {
 									</ul>
 
 									{/* Divider */}
-									<hr className="my-6 border-white/20" />
+									<hr className="my-6 border-white/5" />
 
 									{/* Explore */}
 									<ul className="flex flex-col gap-2">
@@ -218,7 +203,7 @@ const Navbar = () => {
 													router.push(item.path);
 													setShowFullNav(false);
 												}}
-											className="cursor-pointer rounded-lg px-4 py-3 text-sm font-bold uppercase text-white transition hover:bg-white/10"
+												className="cursor-pointer rounded-lg px-4 py-3 text-sm font-semibold uppercase text-slate-300 transition hover:bg-white/5 hover:text-white"
 											>
 												{item.label}
 											</li>
@@ -226,10 +211,10 @@ const Navbar = () => {
 									</ul>
 
 									{/* Divider */}
-									<hr className="my-6 border-white/20" />
+									<hr className="my-6 border-white/5" />
 
 									{/* Language */}
-									<div className="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-white hover:bg-white/10">
+									<div className="flex cursor-pointer items-center gap-3 rounded-lg px-4 py-3 text-slate-300 hover:bg-white/5 hover:text-white">
 										<BsGlobeAmericas />
 										<span className="font-semibold">EN</span>
 										<BsChevronDown />
@@ -242,11 +227,11 @@ const Navbar = () => {
 				</div>
 				<div className="md:hidden">
 					<div
-						className="flex h-10 w-10 items-center justify-center rounded-xl border border-transparent bg-blue-700 text-white transition duration-300 hover:border-blue-700 hover:bg-white hover:text-blue-700"
+						className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition duration-200 hover:bg-slate-50 cursor-pointer"
 						onClick={() => setShowFullNav(!showFullNav)}
 					>
 						<RxHamburgerMenu
-							className={`cursor-pointer ${showFullNav
+							className={`cursor-pointer text-lg ${showFullNav
 								? "rotate-180 transition-all duration-150 ease-in"
 								: "transition-all duration-150 ease-in"
 								}`}

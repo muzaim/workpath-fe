@@ -19,35 +19,35 @@ const Footer = () => {
 							<div className="h-4 w-4 rounded-full bg-white"></div>
 						</div>
 						<div className="absolute -left-2 -top-2 h-9 w-9 rounded-full bg-blue-400 opacity-80"></div>
-						<span className="text-xl font-bold text-white font-poppins lg:text-2xl lg:ml-2">
+						<span className="text-xl font-bold text-white font-poppins ml-2">
 							WorkPath
 						</span>
 					</div>
-					<p className="max-w-md py-5 text-justify font-poppins text-gray-400 lg:text-lg">
+					<p className="max-w-md py-4 text-left font-poppins text-slate-400 text-sm leading-relaxed">
 						WorkPath helps professionals discover the right opportunities,
 						explore trusted companies, and build stronger careers with more
 						confidence.
 					</p>
-					<div className="rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-gray-300">
+					<div className="rounded-xl border border-white/5 bg-white/5 p-4 text-xs text-slate-400">
 						<p className="font-semibold text-white">Built for modern job search</p>
-						<p className="mt-2 leading-6">
+						<p className="mt-1.5 leading-relaxed">
 							Discover curated jobs, compare companies, and keep up with the
 							latest openings in one place.
 						</p>
 					</div>
 				</div>
 				<div className="mt-8 md:col-span-4 md:mt-0">
-					<div className="grid grid-cols-12">
-						<ul className="col-span-6 flex flex-col gap-3 text-gray-400">
+					<div className="grid grid-cols-12 gap-4">
+						<ul className="col-span-6 flex flex-col gap-2.5 text-slate-400 text-sm">
 							<li>
-								<h1 className="font-bold text-white text-xl lg:text-2xl">
+								<h3 className="font-bold text-white text-sm uppercase tracking-wider mb-1">
 									About
-								</h1>
+								</h3>
 							</li>
 							<li>
 								<Link
 									href="/companies"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Companies
 								</Link>
@@ -55,7 +55,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Pricing
 								</Link>
@@ -63,7 +63,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Terms
 								</Link>
@@ -71,7 +71,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Career Advice
 								</Link>
@@ -79,22 +79,22 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Privacy Policy
 								</Link>
 							</li>
 						</ul>
-						<ul className="col-span-6 flex flex-col gap-3 text-gray-400">
+						<ul className="col-span-6 flex flex-col gap-2.5 text-slate-400 text-sm">
 							<li>
-								<h1 className="font-bold text-white text-xl lg:text-2xl">
+								<h3 className="font-bold text-white text-sm uppercase tracking-wider mb-1">
 									Resources
-								</h1>
+								</h3>
 							</li>
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Academy
 								</Link>
@@ -102,7 +102,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Salary Guide
 								</Link>
@@ -110,7 +110,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="#"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Community
 								</Link>
@@ -118,7 +118,7 @@ const Footer = () => {
 							<li>
 								<Link
 									href="/jobs"
-									className="transition hover:text-white lg:text-xl"
+									className="transition hover:text-white"
 								>
 									Job Services
 								</Link>
@@ -127,58 +127,58 @@ const Footer = () => {
 					</div>
 				</div>
 				<div className="mt-8 md:col-span-4 lg:mt-0">
-					<h1 className="text-white font-bold mb-2 text-xl lg:text-2xl">
+					<h3 className="text-white font-bold mb-2 text-sm uppercase tracking-wider">
 						Get the job notifications
-					</h1>
-					<p className="text-gray-400 lg:text-lg">
+					</h3>
+					<p className="text-slate-400 text-sm leading-relaxed">
 						The latest job news, company updates, and hiring insights sent to
 						your inbox weekly.
 					</p>
-					<div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+					<div className="mt-4 rounded-xl border border-white/5 bg-white/5 p-4">
 						<input
-							type="text"
+							type="email"
 							placeholder="Enter your email"
-							className="w-full rounded-lg border border-white/10 bg-white px-4 py-3 text-slate-700"
+							className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-white/20 focus:ring-1 focus:ring-white/20 transition-all"
 						/>
-						<button className="mt-3 w-full rounded-lg bg-blue-700 py-3 font-bold font-poppins text-white transition-all duration-300 hover:bg-white hover:text-blue-900">
+						<button className="mt-3 w-full rounded-lg bg-blue-600 py-2 font-semibold font-poppins text-white transition-colors duration-250 hover:bg-blue-700 shadow-sm">
 							Subscribe
 						</button>
-						<p className="mt-3 text-xs text-gray-400">
+						<p className="mt-2.5 text-[11px] text-slate-500">
 							No spam. Just relevant updates and new opportunities.
 						</p>
 					</div>
 				</div>
 			</div>
 			<div className="container mx-auto px-4 pb-20">
-				<hr className="my-10 border-white/10" />
+				<hr className="my-10 border-white/5" />
 				<div className="flex flex-col items-center justify-between gap-5 md:flex-row">
-					<p className="text-gray-400 text-center">
+					<p className="text-slate-500 text-xs text-center">
 						Copyright © 2026 WorkPath. All rights reserved.
 					</p>
-					<ul className="flex items-center justify-center gap-4">
-						<li className="grid h-9 w-9 cursor-pointer place-content-center rounded-full bg-blue-900 text-white transition-all duration-200 hover:bg-blue-600 lg:h-10 lg:w-10">
+					<ul className="flex items-center justify-center gap-2.5">
+						<li className="grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-white/5 text-slate-400 transition-colors duration-200 hover:bg-blue-600 hover:text-white">
 							<Link href="#" className="">
-								<CiFacebook className="lg:text-xl" />
+								<CiFacebook className="text-lg" />
 							</Link>
 						</li>
-						<li className="grid h-9 w-9 cursor-pointer place-content-center rounded-full bg-blue-900 text-white transition-all duration-200 hover:bg-blue-600 lg:h-10 lg:w-10">
+						<li className="grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-white/5 text-slate-400 transition-colors duration-200 hover:bg-blue-600 hover:text-white">
 							<Link href="#" className="">
-								<CiInstagram className="lg:text-xl" />
+								<CiInstagram className="text-lg" />
 							</Link>
 						</li>
-						<li className="grid h-9 w-9 cursor-pointer place-content-center rounded-full bg-blue-900 text-white transition-all duration-200 hover:bg-blue-600 lg:h-10 lg:w-10">
+						<li className="grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-white/5 text-slate-400 transition-colors duration-200 hover:bg-blue-600 hover:text-white">
 							<Link href="#" className="">
-								<CiLinkedin className="lg:text-xl" />
+								<CiLinkedin className="text-lg" />
 							</Link>
 						</li>
-						<li className="grid h-9 w-9 cursor-pointer place-content-center rounded-full bg-blue-900 text-white transition-all duration-200 hover:bg-blue-600 lg:h-10 lg:w-10">
+						<li className="grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-white/5 text-slate-400 transition-colors duration-200 hover:bg-blue-600 hover:text-white">
 							<Link href="#" className="">
-								<CiTwitter className="lg:text-xl" />
+								<CiTwitter className="text-lg" />
 							</Link>
 						</li>
-						<li className="grid h-9 w-9 cursor-pointer place-content-center rounded-full bg-blue-900 text-white transition-all duration-200 hover:bg-blue-600 lg:h-10 lg:w-10">
+						<li className="grid h-8 w-8 cursor-pointer place-content-center rounded-full bg-white/5 text-slate-400 transition-colors duration-200 hover:bg-blue-600 hover:text-white">
 							<Link href="#" className="">
-								<CiYoutube className="lg:text-xl" />
+								<CiYoutube className="text-lg" />
 							</Link>
 						</li>
 					</ul>

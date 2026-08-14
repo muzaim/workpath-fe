@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import { BsClock, BsGlobe } from "react-icons/bs";
+import { BsClock, BsGlobe, BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
-import { FiBookmark } from "react-icons/fi";
 import { GoPeople } from "react-icons/go";
 import { TbBuildingSkyscraper } from "react-icons/tb";
 
@@ -19,10 +18,15 @@ const DetailCompany = () => {
 	const company = getCompanyById(companyId) || allCompanies[0];
 	const relatedJobs = allJobs.filter((job) => job.company === company?.company);
 	const featuredJobs = relatedJobs.slice(0, 6);
+	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	if (!company) {
 		return null;
 	}
+
+	const similarCompanies = allCompanies
+		.filter((c) => c.industry === company.industry && c.id !== company.id)
+		.slice(0, 3);
 
 	return (
 		<div className="relative overflow-hidden bg-slate-50">
@@ -61,9 +65,20 @@ const DetailCompany = () => {
 									{company.workplace}
 								</span>
 							</div>
-							<h1 className="mb-2 font-poppins text-3xl font-bold text-slate-800">
-								{company.company}
-							</h1>
+							<div className="mb-2 flex flex-wrap items-center gap-2">
+								<h1 className="font-poppins text-3xl font-bold text-slate-800">
+									{company.company}
+								</h1>
+								{company.verified && (
+									<svg className="h-5 w-5 text-blue-500 fill-current shrink-0" viewBox="0 0 20 20" fill="currentColor">
+										<path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+									</svg>
+								)}
+								<div className="flex items-center gap-1 text-xs text-amber-500 font-semibold bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-md ml-1 shadow-sm">
+									<span>★</span>
+									<span>{company.rating || 4.5}</span>
+								</div>
+							</div>
 							<p className="-mt-2 mb-3 hidden max-w-2xl text-gray-500 lg:block">
 								{company.tagline}
 							</p>
@@ -145,120 +160,185 @@ const DetailCompany = () => {
 								<p className="text-sm text-slate-500">{company.location}</p>
 							</div>
 						</div>
-						<div className="flex w-full flex-col items-center justify-end gap-5 border-t border-slate-100 pt-3 lg:flex-row">
-						<div className="lg:hidden">
-							<p className="text-start text-gray-500">{company.tagline}</p>
-							<p className="mt-2 text-gray-500">{company.desc}</p>
-						</div>
-						<div className="flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-3 text-slate-700 shadow-sm transition hover:bg-slate-50">
-							<FiBookmark className="text-xl" />
-							<span className="text-lg font-bold">Mark</span>
-						</div>
+						<div className="flex w-full flex-col items-center justify-end gap-3 border-t border-slate-100 pt-4 lg:flex-row">
+							<div className="lg:hidden">
+								<p className="text-start text-slate-500 text-sm">{company.tagline}</p>
+								<p className="mt-2 text-slate-500 text-sm leading-relaxed">{company.desc}</p>
+							</div>
+							<button
+								onClick={() => {
+									setIsBookmarked(!isBookmarked);
+									alert(isBookmarked ? "Removed bookmark for this company!" : "Company bookmarked successfully!");
+								}}
+								className={`flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-semibold transition-colors duration-250 shadow-sm cursor-pointer ${
+									isBookmarked
+										? "border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100"
+										: "border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+								}`}
+							>
+								{isBookmarked ? <BsBookmarkFill className="text-blue-700" /> : <BsBookmark />}
+								<span>{isBookmarked ? "Bookmarked" : "Bookmark"}</span>
+							</button>
 
-						<button className="rounded-xl bg-blue-600 px-8 py-3 font-semibold text-white shadow-lg transition hover:bg-blue-700">
-							See all opportunity
-						</button>
+							<button
+								onClick={() => {
+									document.getElementById("active-jobs-section")?.scrollIntoView({ behavior: "smooth" });
+								}}
+								className="rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white transition-colors duration-250 hover:bg-blue-700 shadow-sm cursor-pointer"
+							>
+								See all opportunities
+							</button>
 						</div>
 					</div>
 				</div>
 
 				<div className="grid grid-cols-12 gap-5">
 					<div className="col-span-12 md:col-span-9">
-						<div className="h-max w-full rounded-2xl border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
-							<h1 className="border-b border-gray-200 px-9 py-5 text-lg font-bold">
+						<div id="active-jobs-section" className="h-max w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+							<h3 className="border-b border-slate-100 px-6 py-4 text-base font-bold text-slate-800">
 								{relatedJobs.length} Jobs available
-							</h1>
-							<ul className="px-4 py-2">
+							</h3>
+							<ul className="px-3 py-1">
 								{featuredJobs.map((item) => (
 									<li
 										key={item.id}
 										onClick={() => router.push(`/jobs/${item.id}`)}
-										className="cursor-pointer rounded-xl border-b border-gray-200 p-5 transition hover:bg-slate-50"
+										className="group cursor-pointer rounded-xl border-b border-slate-100 last:border-b-0 p-4 transition-colors duration-200 hover:bg-slate-50/50"
 									>
 										<div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 											<div>
-											<div className="mb-2 flex flex-wrap items-center gap-2">
-												<span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-													{item.type}
-												</span>
-												<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-													{item.level}
-												</span>
+												<div className="mb-2 flex flex-wrap items-center gap-2">
+													<span className="rounded bg-blue-50 text-blue-700 border border-blue-100/45 px-2.5 py-0.5 text-[11px] font-semibold">
+														{item.type}
+													</span>
+													<span className="rounded bg-slate-100 text-slate-600 border border-slate-200/40 px-2.5 py-0.5 text-[11px] font-semibold">
+														{item.level}
+													</span>
+												</div>
+												<h4 className="cursor-pointer text-base font-bold text-slate-800 group-hover:text-blue-700 transition-colors duration-200">
+													{item.title}
+												</h4>
+												<p className="mt-1 text-xs font-medium text-slate-500">
+													{item.location} • {item.category}
+												</p>
+												<p className="mt-1.5 text-sm font-bold text-blue-700">
+													Rp{item.salary}
+												</p>
 											</div>
-											<h1 className="cursor-pointer text-lg font-poppins capitalize text-blue-700">
-												{item.title}
-											</h1>
-											<h1 className="mt-1 text-sm font-poppins text-gray-400">
-												{item.location} • {item.category}
-											</h1>
-											<h1 className="mt-1 text-sm font-poppins text-blue-500">
-												Rp{item.salary}
-											</h1>
-											</div>
-											<div className="flex flex-col items-start gap-2 text-sm text-gray-400 lg:items-end">
-											<span className="flex items-center gap-1">
-												<BsClock className="text-sm" />
-												{item.posting}
-											</span>
-											<span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-												{item.workSetup}
-											</span>
+											<div className="flex flex-col items-start gap-2 text-sm text-slate-400 lg:items-end">
+												<span className="flex items-center gap-1.5 text-xs">
+													<BsClock className="text-xs shrink-0" />
+													{item.posting}
+												</span>
+												<span className="rounded bg-slate-100 text-slate-600 border border-slate-200/40 px-2.5 py-0.5 text-[11px] font-semibold">
+													{item.workSetup}
+												</span>
 											</div>
 										</div>
 									</li>
 								))}
 							</ul>
-							<h1 className="flex items-center justify-end gap-2 border-t border-gray-200 px-9 py-5 text-lg font-semibold">
-								More <AiOutlineArrowDown />
-							</h1>
+							<div className="flex items-center justify-center gap-2 border-t border-slate-100 px-6 py-4 text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors duration-200 cursor-pointer">
+								<span>More Opportunities</span> <AiOutlineArrowDown className="text-xs" />
+							</div>
 						</div>
 
-						<div className="mt-5 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.07)]">
-							<h1 className="border-b border-gray-200 px-9 py-5 text-lg font-bold">
+						<div className="mt-5 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+							<h3 className="border-b border-slate-100 px-6 py-4 text-base font-bold text-slate-800">
 								Culture
-							</h1>
+							</h3>
 							<div className="flex flex-col gap-5 p-8 font-poppins">
 								<div>
-									<h1 className="font-bold text-md">
+									<h4 className="font-bold text-slate-800 text-sm mb-2">
 										What’s it like working at {company.company}?
-									</h1>
-									<div className="mt-2 flex flex-col gap-2">
+									</h4>
+									<div className="flex flex-col gap-2">
 										{company.overview.map((paragraph) => (
-											<p key={paragraph} className="text-sm text-gray-500">
+											<p key={paragraph} className="text-sm text-slate-500 leading-relaxed">
 												{paragraph}
 											</p>
 										))}
 									</div>
 								</div>
 								<div>
-									<h1 className="font-bold text-md">
+									<h4 className="font-bold text-slate-800 text-sm mb-2">
 										Benefits and perks of working with us include:
-									</h1>
-									<div className="mt-2 flex flex-col gap-2">
+									</h4>
+									<div className="flex flex-col gap-2">
 										{company.benefits.map((benefit) => (
-											<h1 key={benefit} className="text-sm">
-												<span className="text-gray-500">{benefit}</span>
-											</h1>
+											<div key={benefit} className="flex items-center gap-2">
+												<span className="h-1.5 w-1.5 rounded-full bg-blue-500 shrink-0" />
+												<span className="text-sm text-slate-600">{benefit}</span>
+											</div>
 										))}
 									</div>
 								</div>
-								<div className="rounded-xl border border-slate-200 bg-gradient-to-r from-slate-50 to-blue-50/50 p-4 text-sm text-gray-600 shadow-sm">
+								<div className="rounded-xl border border-slate-100 bg-slate-50/50 p-4 text-sm text-slate-600 shadow-sm">
 									<p>
-										Work setup: <span className="font-semibold">{company.workplace}</span>
+										Work setup: <span className="font-semibold text-slate-800">{company.workplace}</span>
 									</p>
 									<p className="mt-2">
 										Secondary focus:{" "}
-										<span className="font-semibold">{company.secondaryIndustry}</span>
+										<span className="font-semibold text-slate-800">{company.secondaryIndustry}</span>
 									</p>
+								</div>
+							</div>
+						</div>
+
+						{/* Company Reviews Card */}
+						<div className="mt-5 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+							<h3 className="border-b border-slate-100 px-6 py-4 text-base font-bold text-slate-800">
+								Employee Reviews
+							</h3>
+							<div className="p-6 font-poppins">
+								{/* Rating Stats Summary */}
+								<div className="flex items-center gap-4 border-b border-slate-100 pb-5 mb-5">
+									<div className="text-center">
+										<p className="text-4xl font-extrabold text-slate-800">{company.rating || 4.5}</p>
+										<p className="text-[10px] text-slate-400 font-bold uppercase mt-1">Out of 5.0</p>
+									</div>
+									<div className="h-10 w-[1px] bg-slate-200" />
+									<div>
+										<div className="flex items-center gap-1 text-amber-500">
+											{Array.from({ length: 5 }).map((_, i) => (
+												<span key={i} className="text-lg">★</span>
+											))}
+										</div>
+										<p className="text-xs text-slate-500 mt-1">Based on verified employee feedback</p>
+									</div>
+								</div>
+
+								{/* Reviews List */}
+								<div className="flex flex-col gap-4">
+									{(company.reviews || [
+										{ author: "Eka J.", role: "Staff Developer", text: "Proses onboarding sangat rapi dan ramah untuk pemula.", rating: 4, date: "15 Jan 2026" },
+										{ author: "Dina M.", role: "HR Consultant", text: "Lingkungan kerja fleksibel dengan budaya kerja saling mendukung.", rating: 5, date: "22 Nov 2025" }
+									]).map((rev, idx) => (
+										<div key={idx} className="p-4 rounded-xl border border-slate-100 bg-slate-50/30">
+											<div className="flex justify-between items-start gap-2">
+												<div>
+													<h4 className="text-sm font-bold text-slate-800">{rev.author}</h4>
+													<p className="text-[11px] text-slate-500">{rev.role}</p>
+												</div>
+												<span className="text-xs font-semibold text-slate-400">{rev.date}</span>
+											</div>
+											<div className="flex items-center gap-0.5 text-amber-500 mt-1.5 text-xs">
+												{Array.from({ length: rev.rating }).map((_, i) => (
+													<span key={i}>★</span>
+												))}
+											</div>
+											<p className="text-sm text-slate-600 mt-2 leading-relaxed">&ldquo;{rev.text}&rdquo;</p>
+										</div>
+									))}
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<div className="col-span-12 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.07)] md:col-span-3">
-						<h1 className="border-b border-gray-200 px-9 py-5 text-lg font-bold">
+					<div className="col-span-12 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-sm md:col-span-3">
+						<h3 className="border-b border-slate-100 px-6 py-4 text-base font-bold text-slate-800">
 							Gallery
-						</h1>
+						</h3>
 						<div className="grid grid-cols-12 gap-3 p-4 lg:gap-5 lg:p-8">
 							{company.gallery.map((item, index) => (
 								<div
@@ -278,6 +358,40 @@ const DetailCompany = () => {
 							))}
 						</div>
 					</div>
+
+					{similarCompanies.length > 0 && (
+						<div className="mt-5 h-max w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+							<h3 className="border-b border-slate-100 px-6 py-4 text-base font-bold text-slate-800">
+								Similar Companies
+							</h3>
+							<div className="flex flex-col gap-4 p-5">
+								{similarCompanies.map((c) => (
+									<div
+										key={c.id}
+										onClick={() => {
+											router.push(`/companies/${c.id}`);
+										}}
+										className="group flex items-center gap-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition-colors"
+									>
+										<div className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white p-1 shrink-0">
+											<img
+												src={c.logo}
+												alt={c.company}
+												className="h-8 w-8 object-contain rounded-md"
+												onError={(e) => {
+													e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(c.company)}&background=f1f5f9&color=1d4ed8&bold=true`;
+												}}
+											/>
+										</div>
+										<div className="min-w-0">
+											<h4 className="text-sm font-bold text-slate-800 group-hover:text-blue-700 transition-colors truncate">{c.company}</h4>
+											<p className="text-xs text-slate-500 truncate mt-0.5">{c.industry}</p>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 			</div>
